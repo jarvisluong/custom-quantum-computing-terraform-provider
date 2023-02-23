@@ -1,3 +1,12 @@
+terraform {
+  required_providers {
+    custom_quantum_runner = {
+      version = "0.1"
+      source  = "jarvisluong.me/quantum/runner"
+    }
+  }
+}
+
 # This is the custom provider that we will be running
 provider "custom_quantum_runner" {
 }
