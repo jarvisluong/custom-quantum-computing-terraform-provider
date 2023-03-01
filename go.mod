@@ -3,7 +3,6 @@ module terraform-provider-quantum-runners
 go 1.18
 
 require (
-	github.com/hashicorp-demoapp/hashicups-client-go v0.0.0-20210721190446-1df90c457bd4
 	github.com/hashicorp/terraform-plugin-framework v1.0.0
 	github.com/hashicorp/terraform-plugin-log v0.7.0
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.23.0
