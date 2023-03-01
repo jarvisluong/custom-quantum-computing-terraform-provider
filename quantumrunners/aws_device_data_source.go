@@ -1,4 +1,4 @@
-package quantum_runners
+package quantumrunners
 
 import (
 	"context"
