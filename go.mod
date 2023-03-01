@@ -1,4 +1,4 @@
-module terraform-provider-quantum-runners
+module terraform-provider-quantumrunners
 
 go 1.18
 

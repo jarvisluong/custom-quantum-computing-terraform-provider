@@ -1,4 +1,4 @@
-package quantumrunners
+package provider
 
 import (
 	"context"
@@ -8,6 +8,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/provider/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 )
@@ -27,10 +28,13 @@ type quantumRunnerProvider struct{}
 
 // Metadata returns the provider type name.
 func (p *quantumRunnerProvider) Metadata(_ context.Context, _ provider.MetadataRequest, resp *provider.MetadataResponse) {
-	resp.TypeName = "quantum_runners"
+	resp.TypeName = "quantumrunners"
 }
 
 func (p *quantumRunnerProvider) Schema(_ context.Context, _ provider.SchemaRequest, resp *provider.SchemaResponse) {
+	resp.Schema = schema.Schema{
+		Attributes: map[string]schema.Attribute{},
+	}
 }
 
 // Configure prepares a AWS Braket API client for data sources and resources.

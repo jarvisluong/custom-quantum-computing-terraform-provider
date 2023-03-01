@@ -1,9 +1,10 @@
-package quantumrunners
+package provider
 
 import (
 	"context"
 
 	"github.com/aws/aws-sdk-go-v2/service/braket"
+	brakettypes "github.com/aws/aws-sdk-go-v2/service/braket/types"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -36,7 +37,7 @@ type deviceModel struct {
 	DeviceName   types.String `tfsdk:"name"`
 	DeviceStatus types.String `tfsdk:"status"`
 	DeviceType   types.String `tfsdk:"type"`
-	ProviderName types.String `tfsdk:"providerName"`
+	ProviderName types.String `tfsdk:"provider_name"`
 }
 
 // Metadata returns the data source type name.
@@ -70,7 +71,7 @@ func (d *awsDeviceDataSource) Schema(_ context.Context, _ datasource.SchemaReque
 							Description: "Device type, SIMULATOR or QPU.",
 							Computed:    true,
 						},
-						"providerName": schema.StringAttribute{
+						"provider_name": schema.StringAttribute{
 							Description: "Provider name of the device.",
 							Computed:    true,
 						},
@@ -95,7 +96,9 @@ func (d *awsDeviceDataSource) Configure(_ context.Context, req datasource.Config
 func (d *awsDeviceDataSource) Read(ctx context.Context, req datasource.ReadRequest, resp *datasource.ReadResponse) {
 	var state devicesDataSourceModel
 
-	devicesOutput, err := d.client.SearchDevices(ctx, &braket.SearchDevicesInput{})
+	devicesOutput, err := d.client.SearchDevices(ctx, &braket.SearchDevicesInput{
+		Filters: []brakettypes.SearchDevicesFilter{},
+	})
 	if err != nil {
 		resp.Diagnostics.AddError(
 			"Unable to search quantum devices",

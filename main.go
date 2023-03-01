@@ -2,7 +2,7 @@ package main
 
 import (
 	"context"
-	"terraform-provider-quantum-runners/quantumrunners"
+	"terraform-provider-quantumrunners/provider"
 
 	"github.com/hashicorp/terraform-plugin-framework/providerserver"
 )
@@ -11,12 +11,12 @@ import (
 //go:generate go run github.com/hashicorp/terraform-plugin-docs/cmd/tfplugindocs generate --provider-name hashicups
 
 func main() {
-	providerserver.Serve(context.Background(), quantumrunners.New, providerserver.ServeOpts{
+	providerserver.Serve(context.Background(), provider.New, providerserver.ServeOpts{
 		// NOTE: This is not a typical Terraform Registry provider address,
 		// such as registry.terraform.io/hashicorp/hashicups. This specific
 		// provider address is used in these tutorials in conjunction with a
 		// specific Terraform CLI configuration for manual development testing
 		// of this provider.
-		Address: "jarvisluong.me/quantum/quantumrunners",
+		Address: "hashicorp.com/edu/hashicups-pf",
 	})
 }
