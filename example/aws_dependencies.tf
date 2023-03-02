@@ -2,6 +2,8 @@ provider "aws" {
   region = "us-west-1"
 }
 
+data "aws_caller_identity" "current" {}
+
 resource "aws_iam_service_linked_role" "braket" {
   aws_service_name = "braket.amazonaws.com"
 }
@@ -34,3 +36,6 @@ resource "aws_iam_role" "braket_execution" {
   })
 }
 
+resource "aws_s3_bucket" "braket_result" {
+  bucket = "aws_braket_results_${data.aws_caller_identity.current.account_id}"
+}
