@@ -7,6 +7,8 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 )
 
@@ -41,6 +43,9 @@ func (r *quantumCircuitResource) Schema(_ context.Context, _ resource.SchemaRequ
 			"qasm_content": schema.StringAttribute{
 				Description: "QASM format of the quantum circuit",
 				Required:    true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.RequiresReplace(),
+				},
 			},
 			"action": schema.StringAttribute{
 				Description: "converted action of the qasm_content",
@@ -107,29 +112,6 @@ func (r *quantumCircuitResource) Read(ctx context.Context, req resource.ReadRequ
 
 // Update updates the resource and sets the updated Terraform state on success.
 func (r *quantumCircuitResource) Update(ctx context.Context, req resource.UpdateRequest, resp *resource.UpdateResponse) {
-	// Retrieve values from plan
-	var plan quantumCircuitResourceModel
-	diags := req.Plan.Get(ctx, &plan)
-	resp.Diagnostics.Append(diags...)
-	if resp.Diagnostics.HasError() {
-		return
-	}
-	actionAsString, err := ConvertQasmToAction(plan.QasmContent.ValueString())
-
-	if err != nil {
-		resp.Diagnostics.AddError(
-			"Unable to create circuit action",
-			err.Error(),
-		)
-		return
-	}
-	diags = resp.State.Set(ctx, plan)
-	plan.LastUpdated = types.StringValue(time.Now().Format(time.RFC850))
-	plan.Action = types.StringValue(actionAsString)
-	resp.Diagnostics.Append(diags...)
-	if resp.Diagnostics.HasError() {
-		return
-	}
 }
 
 // Delete deletes the resource and removes the Terraform state on success.
