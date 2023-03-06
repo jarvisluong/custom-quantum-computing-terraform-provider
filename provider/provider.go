@@ -70,5 +70,6 @@ func (p *quantumRunnerProvider) DataSources(_ context.Context) []func() datasour
 func (p *quantumRunnerProvider) Resources(_ context.Context) []func() resource.Resource {
 	return []func() resource.Resource{
 		NewQuantumCircuitResource,
+		NewTaskResource,
 	}
 }
