@@ -15,7 +15,7 @@ resource "quantumrunners_quantum_circuit" "circuit" {
 resource "quantumrunners_task" "task" {
   circuit = quantumrunners_quantum_circuit.circuit.action
   device_id = "arn:aws:braket:::device/quantum-simulator/amazon/sv1"
-  output_destination = resource.aws_s3_bucket.braket_result.arn
+  output_destination = resource.aws_s3_bucket.braket_result.bucket
   output_key_prefix = "test"
   shots = 10
 }

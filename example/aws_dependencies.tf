@@ -32,5 +32,5 @@ resource "aws_iam_role" "braket_execution" {
 }
 
 resource "aws_s3_bucket" "braket_result" {
-  bucket = "aws-braket-results-${data.aws_caller_identity.current.account_id}"
+  bucket = "amazon-braket-results-${data.aws_caller_identity.current.account_id}"
 }

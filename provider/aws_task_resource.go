@@ -106,11 +106,11 @@ func (r *taskResource) Create(ctx context.Context, req resource.CreateRequest, r
 	}
 
 	output, err := r.client.CreateQuantumTask(ctx, &braket.CreateQuantumTaskInput{
-		Action:            aws.String(plan.Circuit.String()),
+		Action:            aws.String(plan.Circuit.ValueString()),
 		ClientToken:       aws.String(time.Now().Format(time.RFC850)),
-		DeviceArn:         aws.String(plan.DeviceId.String()),
-		OutputS3Bucket:    aws.String(plan.OutputDestination.String()),
-		OutputS3KeyPrefix: aws.String(plan.OutputKeyPrefix.String()),
+		DeviceArn:         aws.String(plan.DeviceId.ValueString()),
+		OutputS3Bucket:    aws.String(plan.OutputDestination.ValueString()),
+		OutputS3KeyPrefix: aws.String(plan.OutputKeyPrefix.ValueString()),
 		Shots:             aws.Int64(plan.Shots.ValueInt64()),
 	})
 
