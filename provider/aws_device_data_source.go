@@ -8,6 +8,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
+	"github.com/hashicorp/terraform-plugin-log/tflog"
 )
 
 // Ensure the implementation satisfies the expected interfaces.
@@ -95,6 +96,8 @@ func (d *awsDeviceDataSource) Configure(_ context.Context, req datasource.Config
 // Read refreshes the Terraform state with the latest data.
 func (d *awsDeviceDataSource) Read(ctx context.Context, req datasource.ReadRequest, resp *datasource.ReadResponse) {
 	var state devicesDataSourceModel
+
+	tflog.Info(ctx, req.Config.Raw.String())
 
 	devicesOutput, err := d.client.SearchDevices(ctx, &braket.SearchDevicesInput{
 		Filters: []brakettypes.SearchDevicesFilter{},

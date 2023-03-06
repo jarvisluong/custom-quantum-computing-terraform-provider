@@ -68,5 +68,7 @@ func (p *quantumRunnerProvider) DataSources(_ context.Context) []func() datasour
 
 // Resources defines the resources implemented in the provider.
 func (p *quantumRunnerProvider) Resources(_ context.Context) []func() resource.Resource {
-	return nil
+	return []func() resource.Resource{
+		NewTaskResource,
+	}
 }

@@ -2,7 +2,6 @@ provider "quantumrunners" {
 }
 
 data "quantumrunners_devices" "devices" {
-  # provider = quantumrunners
 }
 
 data "local_file" "qasm" {
