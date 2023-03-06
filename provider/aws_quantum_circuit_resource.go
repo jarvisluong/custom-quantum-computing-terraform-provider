@@ -71,7 +71,7 @@ func (r *quantumCircuitResource) Create(ctx context.Context, req resource.Create
 	var circuit quantumCircuitResourceModel
 	diags := req.Plan.Get(ctx, &circuit)
 
-	actionAsString, err := ConvertQasmToAction(circuit.QasmContent.String())
+	actionAsString, err := ConvertQasmToAction(circuit.QasmContent.ValueString())
 
 	if err != nil {
 		resp.Diagnostics.AddError(
@@ -114,7 +114,7 @@ func (r *quantumCircuitResource) Update(ctx context.Context, req resource.Update
 	if resp.Diagnostics.HasError() {
 		return
 	}
-	actionAsString, err := ConvertQasmToAction(plan.QasmContent.String())
+	actionAsString, err := ConvertQasmToAction(plan.QasmContent.ValueString())
 
 	if err != nil {
 		resp.Diagnostics.AddError(

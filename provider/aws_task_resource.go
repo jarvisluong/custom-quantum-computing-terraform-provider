@@ -12,6 +12,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/types"
+	"github.com/hashicorp/terraform-plugin-log/tflog"
 )
 
 // Ensure the implementation satisfies the expected interfaces.
@@ -105,9 +106,13 @@ func (r *taskResource) Create(ctx context.Context, req resource.CreateRequest, r
 		return
 	}
 
+	tflog.Info(ctx, plan.Circuit.ValueString())
+
+	clientId := time.Now().Format(time.RFC850)
+
 	output, err := r.client.CreateQuantumTask(ctx, &braket.CreateQuantumTaskInput{
 		Action:            aws.String(plan.Circuit.ValueString()),
-		ClientToken:       aws.String(time.Now().Format(time.RFC850)),
+		ClientToken:       aws.String(clientId),
 		DeviceArn:         aws.String(plan.DeviceId.ValueString()),
 		OutputS3Bucket:    aws.String(plan.OutputDestination.ValueString()),
 		OutputS3KeyPrefix: aws.String(plan.OutputKeyPrefix.ValueString()),
@@ -123,6 +128,7 @@ func (r *taskResource) Create(ctx context.Context, req resource.CreateRequest, r
 	}
 
 	plan.TaskId = types.StringValue(*output.QuantumTaskArn)
+	plan.ClientToken = types.StringValue(clientId)
 
 	resp.State.Set(ctx, &plan)
 }
