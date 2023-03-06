@@ -2,3 +2,4 @@ test_tf/*
 .terraform
 terraform.tfstate
 terraform.tfstate.backup
+example/.terraform.tfstate.lock.info
