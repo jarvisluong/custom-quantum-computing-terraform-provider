@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  main:
+    build: .
+    entrypoint:
+      - python3
+    volumes:
+      - ./main.py:/app/main.py
+    stdin_open: true 
+    tty: true
