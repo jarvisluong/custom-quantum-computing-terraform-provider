@@ -39,6 +39,7 @@ type taskResourceModel struct {
 	OutputKeyPrefix   types.String `tfsdk:"output_key_prefix"`
 	Shots             types.Int64  `tfsdk:"shots"`
 	TaskId            types.String `tfsdk:"task_id"`
+	TaskStatus        types.String `tfsdk:"task_status"`
 }
 
 // Metadata returns the resource type name.
@@ -52,6 +53,10 @@ func (r *taskResource) Schema(_ context.Context, _ resource.SchemaRequest, resp 
 		Attributes: map[string]schema.Attribute{
 			"task_id": schema.StringAttribute{
 				Description: "The task id",
+				Computed:    true,
+			},
+			"task_status": schema.StringAttribute{
+				Description: "The task status",
 				Computed:    true,
 			},
 			"device_id": schema.StringAttribute{
@@ -110,7 +115,7 @@ func (r *taskResource) Create(ctx context.Context, req resource.CreateRequest, r
 
 	clientId := time.Now().Format(time.RFC850)
 
-	output, err := r.client.CreateQuantumTask(ctx, &braket.CreateQuantumTaskInput{
+	quantumTask, err := r.client.CreateQuantumTask(ctx, &braket.CreateQuantumTaskInput{
 		Action:            aws.String(plan.Circuit.ValueString()),
 		ClientToken:       aws.String(clientId),
 		DeviceArn:         aws.String(plan.DeviceId.ValueString()),
@@ -127,7 +132,20 @@ func (r *taskResource) Create(ctx context.Context, req resource.CreateRequest, r
 		return
 	}
 
-	plan.TaskId = types.StringValue(*output.QuantumTaskArn)
+	taskDetail, err := r.client.GetQuantumTask(ctx, &braket.GetQuantumTaskInput{
+		QuantumTaskArn: quantumTask.QuantumTaskArn,
+	})
+
+	if err != nil {
+		resp.Diagnostics.AddWarning(
+			"Unable to get quantum task details",
+			err.Error(),
+		)
+	} else {
+		plan.TaskStatus = types.StringValue(string(taskDetail.Status))
+	}
+
+	plan.TaskId = types.StringValue(*quantumTask.QuantumTaskArn)
 	plan.ClientToken = types.StringValue(clientId)
 
 	resp.State.Set(ctx, &plan)
@@ -135,6 +153,31 @@ func (r *taskResource) Create(ctx context.Context, req resource.CreateRequest, r
 
 // Read refreshes the Terraform state with the latest data.
 func (r *taskResource) Read(ctx context.Context, req resource.ReadRequest, resp *resource.ReadResponse) {
+	var state taskResourceModel
+	diags := req.State.Get(ctx, &state)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
+	taskDetail, err := r.client.GetQuantumTask(ctx, &braket.GetQuantumTaskInput{
+		QuantumTaskArn: aws.String(state.TaskId.ValueString()),
+	})
+
+	if err != nil {
+		resp.Diagnostics.AddWarning(
+			"Unable to get quantum task details",
+			err.Error(),
+		)
+	} else {
+		state.TaskStatus = types.StringValue(string(taskDetail.Status))
+	}
+
+	diags = resp.State.Set(ctx, &state)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
 }
 
 // Update updates the resource and sets the updated Terraform state on success.
