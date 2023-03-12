@@ -3,8 +3,11 @@ version: '3'
 services:
   task_waiter:
     build: .
+    env_file:
+      - .env
     volumes:
       - $HOME/.aws:/root/.aws
       - ./task_wait_and_fetch_data.py:/app/task_wait_and_fetch_data.py
+      - ./out:/app/out
     stdin_open: true 
     tty: true

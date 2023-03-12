@@ -3,3 +3,5 @@ test_tf/*
 terraform.tfstate
 terraform.tfstate.backup
 example/.terraform.tfstate.lock.info
+task_result_waiter/out/results.json
+task_result_waiter/.env
