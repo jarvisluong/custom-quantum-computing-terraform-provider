@@ -36,6 +36,10 @@ output "task_id" {
   value = split("/", quantumrunners_task.task.task_id)[1]
 }
 
+output "task_arn" {
+  value = quantumrunners_task.task.task_id
+}
+
 output "task_status" {
   value = quantumrunners_task.task.task_status
 }
