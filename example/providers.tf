@@ -9,5 +9,9 @@ terraform {
     local = {
       source = "hashcorp/local"
     }
+    shell = {
+      source = "scottwinkler/shell"
+    }
+
   }
 }
