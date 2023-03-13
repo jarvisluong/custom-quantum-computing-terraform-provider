@@ -6,12 +6,10 @@ variable "azure_workspace_name" {
   default = "QuantumRunnerWorkspace"
 }
 
-resource "shell_script" "azure_job" {
+resource "shell_script" "azure_workspace" {
   lifecycle_commands {
-    create = file("${path.module}/azure_scripts/create.sh")
-    read   = file("${path.module}/azure_scripts/read.sh")
-    update = file("${path.module}/azure_scripts/update.sh")
-    delete = file("${path.module}/azure_scripts/delete.sh")
+    create = file("${path.module}/azure_quantum_workspace_scripts/create.sh")
+    delete = file("${path.module}/azure_quantum_workspace_scripts/delete.sh")
   }
 
   environment = {
