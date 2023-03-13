@@ -9,10 +9,6 @@ variable "output_key_prefix" {
 data "quantumrunners_devices" "devices" {
 }
 
-data "local_file" "qasm" {
-  filename = "example.qasm"
-}
-
 resource "quantumrunners_quantum_circuit" "circuit" {
   qasm_content = data.local_file.qasm.content
 }
