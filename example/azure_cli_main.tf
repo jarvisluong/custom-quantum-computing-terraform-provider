@@ -27,14 +27,18 @@ resource "shell_script" "azure_workspace" {
 
 data "shell_script" "available_azure_runner_target" {
   lifecycle_commands {
-    read = file("${path.module}/azure_quantum_workspace_scripts/create.sh")
+    read = file("${path.module}/azure_quantum_targets/read.sh")
   }
 
   environment = {
     AZURE_RESOURCE_GROUP        = resource.azurerm_resource_group.quantum_runner.name
-    WORKSPACE_NAME = shell_script.azure_workspace.output["name"]
+    WORKSPACE_NAME = var.azure_workspace_name
     AZURE_LOCATION = var.azure_location
   }
+
+  depends_on = [
+    resource.shell_script.azure_workspace
+  ]
 }
 
 resource "shell_script" "azure_quantum_job" {
@@ -51,4 +55,8 @@ resource "shell_script" "azure_quantum_job" {
     JOB_RUNNER_TARGET = var.azure_quantum_job_runner_target
     CIRCUIT_CONTENT_PATH = "${path.module}/example.qasm"
   }
+
+  depends_on = [
+    resource.shell_script.azure_workspace
+  ]
 }
