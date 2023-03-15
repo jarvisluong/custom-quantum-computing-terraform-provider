@@ -2,7 +2,7 @@ package main
 
 import (
 	"context"
-	"terraform-provider-quantumrunners/provider"
+	provider "terraform-provider-quantumrunners/custom_provider"
 
 	"github.com/hashicorp/terraform-plugin-framework/providerserver"
 )
