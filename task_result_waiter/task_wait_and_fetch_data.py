@@ -16,5 +16,7 @@ while True:
     )
     if response['status'] == 'COMPLETED':
         s3.meta.client.download_file(response['outputS3Bucket'], f"{response['outputS3Directory']}/results.json", "out/results.json")
+        print("Downloaded to out/results.json")
         break
+    print(f"Task {sys.argv[1]} status is still {response['status']}")
     time.sleep(5.0)
