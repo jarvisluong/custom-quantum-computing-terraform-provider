@@ -41,22 +41,22 @@ data "shell_script" "available_azure_runner_target" {
   ]
 }
 
-resource "shell_script" "azure_quantum_job" {
-  lifecycle_commands {
-    create = file("${path.module}/azure_quantum_job_scripts/create.sh")
-    delete = file("${path.module}/azure_quantum_job_scripts/delete.sh")
-  }
+# resource "shell_script" "azure_quantum_job" {
+#   lifecycle_commands {
+#     create = file("${path.module}/azure_quantum_job_scripts/create.sh")
+#     delete = file("${path.module}/azure_quantum_job_scripts/delete.sh")
+#   }
 
-  environment = {
-    AZURE_RESOURCE_GROUP        = resource.azurerm_resource_group.quantum_runner.name
-    WORKSPACE_NAME = var.azure_workspace_name
-    AZURE_LOCATION = var.azure_location
-    AZURE_STORAGE_ACCOUNT = resource.azurerm_storage_account.quantum_results.name
-    JOB_RUNNER_TARGET = var.azure_quantum_job_runner_target
-    CIRCUIT_CONTENT_PATH = "${path.module}/example.qasm"
-  }
+#   environment = {
+#     AZURE_RESOURCE_GROUP        = resource.azurerm_resource_group.quantum_runner.name
+#     WORKSPACE_NAME = var.azure_workspace_name
+#     AZURE_LOCATION = var.azure_location
+#     AZURE_STORAGE_ACCOUNT = resource.azurerm_storage_account.quantum_results.name
+#     JOB_RUNNER_TARGET = var.azure_quantum_job_runner_target
+#     CIRCUIT_CONTENT_PATH = "${path.module}/example.qasm"
+#   }
 
-  depends_on = [
-    resource.shell_script.azure_workspace
-  ]
-}
+#   depends_on = [
+#     resource.shell_script.azure_workspace
+#   ]
+# }

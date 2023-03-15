@@ -22,12 +22,6 @@ resource "quantumrunners_task" "task" {
   shots = 10
 }
 
-data "aws_s3_object" "run_result" {
-  count = quantumrunners_task.task.task_status == "COMPLETED" ? 1 : 0
-  bucket = resource.aws_s3_bucket.braket_result.bucket
-  key    = "${var.output_key_prefix}/${split("/", quantumrunners_task.task.task_id)[1]}/results.json"
-}
-
 output "task_id" {
   value = split("/", quantumrunners_task.task.task_id)[1]
 }
@@ -38,8 +32,4 @@ output "task_arn" {
 
 output "task_status" {
   value = quantumrunners_task.task.task_status
-}
-
-output "task_result" {
-  value = data.aws_s3_object.run_result[0].body
 }
