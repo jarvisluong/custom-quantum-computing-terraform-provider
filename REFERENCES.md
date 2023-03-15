@@ -1,0 +1,1 @@
+1. https://docs.aws.amazon.com/braket/latest/developerguide/braket-monitor-eventbridge.html
