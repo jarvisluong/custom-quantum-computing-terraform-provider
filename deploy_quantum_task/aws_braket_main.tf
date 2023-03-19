@@ -19,7 +19,7 @@ resource "quantumrunners_task" "task" {
   # device_id = "arn:aws:braket:::device/quantum-simulator/amazon/sv1"
   output_destination = resource.aws_s3_bucket.braket_result.bucket
   output_key_prefix = var.output_key_prefix
-  shots = 10
+  shots = 1000
 }
 
 output "task_id" {
