@@ -27,6 +27,7 @@ while True:
             joined_measurement = map(lambda measurement: ''.join(map(lambda x: str(x), measurement)),content['measurements'])
             counted_measurement = count_by(joined_measurement)
             plot_histogram(counted_measurement, filename="out/result.jpg")
+            print("Result printed to out/result.json")
         break
     print(f"Task {sys.argv[1]} status is still {response['status']}")
     time.sleep(5.0)
