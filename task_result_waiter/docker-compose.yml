@@ -3,6 +3,7 @@ version: '3'
 services:
   task_waiter:
     build: .
+    container_name: task_waiter
     env_file:
       - .env
     volumes:

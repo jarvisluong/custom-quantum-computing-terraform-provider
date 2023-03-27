@@ -2,7 +2,6 @@ package provider
 
 import (
 	"context"
-	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/braket"
@@ -13,6 +12,8 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
+
+	"github.com/google/uuid"
 )
 
 // Ensure the implementation satisfies the expected interfaces.
@@ -113,7 +114,7 @@ func (r *taskResource) Create(ctx context.Context, req resource.CreateRequest, r
 
 	tflog.Info(ctx, plan.Circuit.ValueString())
 
-	clientId := time.Now().Format(time.RFC850)
+	clientId := uuid.New().String()
 
 	quantumTask, err := r.client.CreateQuantumTask(ctx, &braket.CreateQuantumTaskInput{
 		Action:            aws.String(plan.Circuit.ValueString()),
