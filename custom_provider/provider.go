@@ -10,6 +10,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-framework/provider/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 )
 
@@ -26,6 +27,10 @@ func New() provider.Provider {
 // quantumRunnerProvider is the provider implementation.
 type quantumRunnerProvider struct{}
 
+type quantumRunnerProviderModel struct {
+	Region types.String `tfsdk:"region"`
+}
+
 // Metadata returns the provider type name.
 func (p *quantumRunnerProvider) Metadata(_ context.Context, _ provider.MetadataRequest, resp *provider.MetadataResponse) {
 	resp.TypeName = "quantumrunners"
@@ -33,12 +38,25 @@ func (p *quantumRunnerProvider) Metadata(_ context.Context, _ provider.MetadataR
 
 func (p *quantumRunnerProvider) Schema(_ context.Context, _ provider.SchemaRequest, resp *provider.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		Attributes: map[string]schema.Attribute{},
+		Attributes: map[string]schema.Attribute{
+			"region": schema.StringAttribute{
+				Optional: true,
+			},
+		},
 	}
 }
 
 // Configure prepares a AWS Braket API client for data sources and resources.
 func (p *quantumRunnerProvider) Configure(ctx context.Context, req provider.ConfigureRequest, resp *provider.ConfigureResponse) {
+
+	// Retrieve provider data from configuration
+	var providerConfig quantumRunnerProviderModel
+	diags := req.Config.Get(ctx, &providerConfig)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
 	tflog.Info(ctx, "Configuring AWS SDK Golang client")
 
 	// Load the Shared AWS Configuration (~/.aws/config)
@@ -46,6 +64,10 @@ func (p *quantumRunnerProvider) Configure(ctx context.Context, req provider.Conf
 	if err != nil {
 		resp.Diagnostics.AddError("Cannot load aws configuration", err.Error())
 		return
+	}
+
+	if !providerConfig.Region.IsNull() {
+		cfg.Region = providerConfig.Region.ValueString()
 	}
 
 	// Create an Amazon S3 service client
