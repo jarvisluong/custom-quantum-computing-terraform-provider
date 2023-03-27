@@ -1,4 +1,9 @@
 provider "aws" {
+  region = "us-east-1"
+}
+
+provider "aws" {
+  alias = "uswest1"
   region = "us-west-1"
 }
 
@@ -32,5 +37,6 @@ resource "aws_iam_role" "braket_execution" {
 }
 
 resource "aws_s3_bucket" "braket_result" {
+  provider = aws.uswest1
   bucket = "amazon-braket-results-${data.aws_caller_identity.current.account_id}"
 }
