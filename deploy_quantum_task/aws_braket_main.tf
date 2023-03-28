@@ -81,13 +81,13 @@ resource "quantumrunners_task" "graph_state_task_simulator" {
   shots = 1000
 }
 
-resource "quantumrunners_task" "graph_state_task_ionq" {
-  circuit = quantumrunners_quantum_circuit.graph_state_circuit_ionq.action
-  device_id = "arn:aws:braket:::device/qpu/ionq/ionQdevice"
-  output_destination = resource.aws_s3_bucket.braket_result.bucket
-  output_key_prefix = var.output_key_prefix
-  shots = 1000
-}
+# resource "quantumrunners_task" "graph_state_task_ionq" {
+#   circuit = quantumrunners_quantum_circuit.graph_state_circuit_ionq.action
+#   device_id = "arn:aws:braket:::device/qpu/ionq/ionQdevice"
+#   output_destination = resource.aws_s3_bucket.braket_result.bucket
+#   output_key_prefix = var.output_key_prefix
+#   shots = 1000
+# }
 
 resource "quantumrunners_task" "graph_state_task_rigetti" {
   provider = quantumrunners.uswest1
@@ -132,10 +132,10 @@ output "task_metadata" {
       status = quantumrunners_task.graph_state_task_simulator.task_status,
       is_simulator = true
     },
-    graph_state_task_ionq = {
-      arn = quantumrunners_task.graph_state_task_ionq.task_id,
-      status = quantumrunners_task.graph_state_task_ionq.task_status
-    },
+    # graph_state_task_ionq = {
+    #   arn = quantumrunners_task.graph_state_task_ionq.task_id,
+    #   status = quantumrunners_task.graph_state_task_ionq.task_status
+    # },
     graph_state_task_rigetti = {
       arn = quantumrunners_task.graph_state_task_rigetti.task_id,
       status = quantumrunners_task.graph_state_task_rigetti.task_status
