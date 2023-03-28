@@ -1,3 +1,4 @@
+import time
 from python_terraform import Terraform
 import json
 import numpy as np
@@ -53,21 +54,7 @@ def total_variation_distance(P, Q):
 def fidelity(P, Q):
     return 1 - total_variation_distance(P, Q)    
 
-step_print("Apply latest terraform state")
-t.apply_cmd(auto_approve=True, capture_output=False)
-
-step_print("Get terraform state output")
-(return_code, stdout, stderr) = t.output_cmd(json=True)
-json_out = json.loads(str(stdout))
-
-task_metadata = _.get(json_out, "task_metadata.value")
-
-all_task_names = _.filter_(
-    list(task_metadata.keys()),
-    lambda name: task_metadata[name]['status'] == 'COMPLETED'
-)
-
-def benchmark_for_task(task_name):
+def benchmark_for_task(task_name, task_metadata):
     step_print(f"Benchmark for task ${task_name}")
     task_names = _.filter_(
         all_task_names,
@@ -107,5 +94,32 @@ def benchmark_for_task(task_name):
     print("Closest measurement matrix:", task_qpu_names[closest_index])
 
 
-benchmark_for_task("graph_state_task")
-benchmark_for_task("ghz_task")
+def poll_task_status():
+    while True:
+        step_print("Apply latest terraform state")
+        t.apply_cmd(auto_approve=True, capture_output=True)
+
+        step_print("Get terraform state output")
+        (_1, stdout, _2) = t.output_cmd(json=True)
+        json_out = json.loads(str(stdout))
+
+        task_metadata = _.get(json_out, "task_metadata.value")
+
+        any_pending_tasks = _.filter_(
+            list(task_metadata.keys()),
+            lambda name: task_metadata[name]['status'] == 'CREATED' or task_metadata[name]['status'] == 'QUEUED'
+        )
+
+        if len(any_pending_tasks) == 0:
+            return task_metadata
+        print(f"Tasks {', '.join(any_pending_tasks)} are still pending, re-running in 5 seconds")
+        time.sleep(5.0)
+
+task_metadata = poll_task_status()
+all_task_names = _.filter_(
+    list(task_metadata.keys()),
+    lambda name: task_metadata[name]['status'] == 'COMPLETED'
+)
+
+benchmark_for_task("graph_state_task", task_metadata)
+benchmark_for_task("ghz_task", task_metadata)
