@@ -1,0 +1,6 @@
+boto3
+qiskit-braket-provider
+qiskit==0.41.1
+rustworkx
+matplotlib
+pydash
