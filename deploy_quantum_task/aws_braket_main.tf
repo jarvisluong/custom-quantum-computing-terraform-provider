@@ -112,7 +112,8 @@ output "task_metadata" {
   value = {
     ghz_task_simulator = {
       arn = quantumrunners_task.ghz_task_simulator.task_id,
-      status = quantumrunners_task.ghz_task_simulator.task_status
+      status = quantumrunners_task.ghz_task_simulator.task_status,
+      is_simulator = true
     },
     ghz_task_ionq = {
       arn = quantumrunners_task.ghz_task_ionq.task_id,
@@ -128,7 +129,8 @@ output "task_metadata" {
     },
     graph_state_task_simulator = {
       arn = quantumrunners_task.graph_state_task_simulator.task_id,
-      status = quantumrunners_task.graph_state_task_simulator.task_status
+      status = quantumrunners_task.graph_state_task_simulator.task_status,
+      is_simulator = true
     },
     graph_state_task_ionq = {
       arn = quantumrunners_task.graph_state_task_ionq.task_id,

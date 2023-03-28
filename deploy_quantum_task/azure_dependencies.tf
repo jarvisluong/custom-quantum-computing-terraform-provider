@@ -5,6 +5,7 @@ provider "azurerm" {
 
 variable "azure_subscription_id" {
   type = string
+  default = "5845aa0b-3f67-4ede-b1d1-8cfa58fe11df"
 }
 variable "azure_location" {
   type = string
