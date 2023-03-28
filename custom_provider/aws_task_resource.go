@@ -5,6 +5,8 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/braket"
+	awstypes "github.com/aws/aws-sdk-go-v2/service/braket/types"
+
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
@@ -187,6 +189,36 @@ func (r *taskResource) Update(ctx context.Context, req resource.UpdateRequest, r
 
 // Delete deletes the resource and removes the Terraform state on success.
 func (r *taskResource) Delete(ctx context.Context, req resource.DeleteRequest, resp *resource.DeleteResponse) {
+	var state taskResourceModel
+	diags := req.State.Get(ctx, &state)
+	resp.Diagnostics.Append(diags...)
+	if resp.Diagnostics.HasError() {
+		return
+	}
+
+	taskDetail, err := r.client.GetQuantumTask(ctx, &braket.GetQuantumTaskInput{
+		QuantumTaskArn: aws.String(state.TaskId.ValueString()),
+	})
+
+	if err != nil {
+		resp.Diagnostics.AddWarning(
+			"Unable to get quantum task details",
+			err.Error(),
+		)
+	}
+	if taskDetail.Status == awstypes.QuantumTaskStatusQueued ||
+		taskDetail.Status == awstypes.QuantumTaskStatusCreated ||
+		taskDetail.Status == awstypes.QuantumTaskStatusRunning {
+		_, err := r.client.CancelQuantumTask(ctx, &braket.CancelQuantumTaskInput{
+			QuantumTaskArn: aws.String(state.TaskId.ValueString()),
+		})
+		if err != nil {
+			resp.Diagnostics.AddWarning(
+				"Unable to cancel quantum task"+state.TaskId.ValueString(),
+				err.Error(),
+			)
+		}
+	}
 }
 
 // Configure adds the provider configured client to the resource.
