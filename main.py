@@ -49,8 +49,8 @@ def total_variation_distance(P, Q):
 def fidelity(P, Q):
     return 1 - total_variation_distance(P, Q)    
 
-# step_print("Apply latest terraform state")
-# t.apply_cmd(auto_approve=True, capture_output=False)
+step_print("Apply latest terraform state")
+t.apply_cmd(auto_approve=True, capture_output=False)
 
 step_print("Get terraform state output")
 (return_code, stdout, stderr) = t.output_cmd(json=True)
@@ -58,51 +58,50 @@ json_out = json.loads(str(stdout))
 
 task_metadata = _.get(json_out, "task_metadata.value")
 
-task_names = _.filter_(
+all_task_names = _.filter_(
     list(task_metadata.keys()),
     lambda name: task_metadata[name]['status'] == 'COMPLETED'
 )
 
-# ghz_task_names = _.filter_(task_names, lambda x: _.starts_with(x, 'ghz_task'))
-# ghz_completed_task_arns = _.map_(
-#     _.filter_(ghz_task_names, lambda name: task_metadata[name]['status'] == 'COMPLETED'),
-#     lambda name: task_metadata[name]['arn']
-# )
+def benchmark_for_task(task_name):
+    step_print(f"Benchmark for task ${task_name}")
+    task_names = _.filter_(
+        all_task_names,
+        lambda name: _.starts_with(name, task_name)
+    )
+    print("Graph state tasks:", ", ".join(task_names))
 
-graph_state_task_names = _.filter_(
-    task_names,
-    lambda name: _.starts_with(name, 'graph_state_task')
-)
-print("Graph state tasks:", ", ".join(graph_state_task_names))
+    task_simulator_name = f"{task_name}_simulator"
+    task_simulator_arn = task_metadata[task_simulator_name]['arn']
+    task_simulator_measurement = get_quantum_task_measurement_probabilities(
+        task_simulator_name,
+        task_simulator_arn)
 
-graph_state_task_simulator_name = "graph_state_task_simulator"
-graph_state_task_simulator_arn = task_metadata["graph_state_task_simulator"]['arn']
-graph_state_task_simulator_measurement = get_quantum_task_measurement_probabilities(
-    graph_state_task_simulator_name,
-    graph_state_task_simulator_arn)
+    task_qpu_names = _.filter_(
+        task_names,
+        lambda name: name != task_simulator_name
+    )
+    print("Benchmarking tasks: " + ", ".join(task_qpu_names))
 
-graph_state_task_qpu_names = _.filter_(
-    graph_state_task_names,
-    lambda name: name != graph_state_task_simulator_name
-)
-print("Benchmarking tasks: " + ", ".join(graph_state_task_qpu_names))
-graph_state_task_qpu_task_arns = [task_metadata[name]['arn'] for name in graph_state_task_qpu_names]
+    task_qpu_task_measurements = [
+        get_quantum_task_measurement_probabilities(
+            task_name,
+            task_metadata[task_name]['arn']
+        ) 
+        for task_name in task_qpu_names
+    ]
+    # Calculate the fidelity using TVD
+    fidelities = [
+        fidelity(task_simulator_measurement, measurement_matrix) 
+        for measurement_matrix in task_qpu_task_measurements
+    ]
+    print("Fidelty for each task: " + ", ".join([str(value) for value in fidelities]))
 
-graph_state_task_qpu_task_measurements = [
-    get_quantum_task_measurement_probabilities(
-        task_name,
-        task_metadata[task_name]['arn']
-    ) 
-    for task_name in graph_state_task_qpu_names
-]
-# Calculate the fidelity using TVD
-fidelities = [
-    fidelity(graph_state_task_simulator_measurement, measurement_matrix) 
-    for measurement_matrix in graph_state_task_qpu_task_measurements
-]
-print("Fidelty for each task: " + ", ".join([str(value) for value in fidelities]))
+    # Find the index of the measurement matrix with the smallest Frobenius norm
+    closest_index = np.argmax(fidelities)
 
-# Find the index of the measurement matrix with the smallest Frobenius norm
-closest_index = np.argmax(fidelities)
+    print("Closest measurement matrix:", task_qpu_names[closest_index])
 
-print("Closest measurement matrix:", graph_state_task_qpu_names[closest_index])
+
+benchmark_for_task("graph_state_task")
+benchmark_for_task("ghz_task")

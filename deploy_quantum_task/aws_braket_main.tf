@@ -41,7 +41,7 @@ resource "quantumrunners_quantum_circuit" "graph_state_circuit_ionq" {
 
 resource "quantumrunners_task" "ghz_task_simulator" {
   circuit = quantumrunners_quantum_circuit.ghz_circuit.action
-  device_id = "arn:aws:braket:::device/quantum-simulator/amazon/dm1"
+  device_id = "arn:aws:braket:::device/quantum-simulator/amazon/sv1"
   output_destination = resource.aws_s3_bucket.braket_result.bucket
   output_key_prefix = var.output_key_prefix
   shots = 1000
