@@ -5,6 +5,7 @@ import pydash as _
 import boto3
 from botocore.config import Config
 from arn import Arn
+import itertools
 
 s3 = boto3.resource('s3')
 
@@ -36,10 +37,13 @@ def get_quantum_task_measurement_probabilities(name, arn):
         if 'measurementProbabilities' in content:
             output = np.array(list(content['measurementProbabilities'].values()))
         else:
+            permutations = list(itertools.product(range(2), repeat=len(content['measuredQubits'])))
+            all_possible_states = [''.join([str(num) for num in permutation]) for permutation in permutations]
             measurements = content['measurements']
             joined_measurement = map(lambda measurement: ''.join(map(lambda x: str(x), measurement)), measurements)
             counted_measurement = _.count_by(joined_measurement)
-            output = np.array([count / len(measurements) for count in list(counted_measurement.values())])
+            all_states_count = [_.get(counted_measurement, state, 0) for state in all_possible_states]
+            output = np.array([count / len(measurements) for count in all_states_count])
         print(f"Measurement probability for {name}: {str(output)}")
         return output
 
