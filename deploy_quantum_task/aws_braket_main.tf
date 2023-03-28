@@ -16,7 +16,15 @@ variable "output_key_prefix" {
   default = "test"
 }
 
-data "quantumrunners_devices" "devices" {
+data "quantumrunners_devices" "devices_us_east_1" {
+}
+
+data "quantumrunners_devices" "devices_us_west_1" {
+  provider = quantumrunners.uswest1
+}
+
+data "quantumrunners_devices" "devices_eu_west_2" {
+  provider = quantumrunners.euwest2
 }
 
 resource "quantumrunners_quantum_circuit" "ghz_circuit" {
