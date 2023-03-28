@@ -14,7 +14,7 @@ def step_print(msg):
     print("\n")
     print(f"===== {msg} =====")
 
-def get_quantum_task_measurements(name, arn):
+def get_quantum_task_measurement_probabilities(name, arn):
     arn_obj = Arn(input_arn=arn)
     braket_config = Config(
         region_name = arn_obj.region
@@ -31,10 +31,23 @@ def get_quantum_task_measurements(name, arn):
     )
     with open(target_download_file_path) as result_file:
         content = json.load(result_file)
-        return np.array(content['measurements'])
+        output = None
+        # We are assuming the measurementProbabilities is arranged in alphabetical order
+        if 'measurementProbabilities' in content:
+            output = np.array(list(content['measurementProbabilities'].values()))
+        else:
+            measurements = content['measurements']
+            joined_measurement = map(lambda measurement: ''.join(map(lambda x: str(x), measurement)), measurements)
+            counted_measurement = _.count_by(joined_measurement)
+            output = np.array([count / len(measurements) for count in list(counted_measurement.values())])
+        print(f"Measurement probability for {name}: {str(output)}")
+        return output
 
-def frobenius_norm(A, B):
-    return np.linalg.norm(A - B, 'fro')
+def total_variation_distance(P, Q):
+    return 0.5 * np.sum(np.abs(P - Q))
+
+def fidelity(P, Q):
+    return 1 - total_variation_distance(P, Q)    
 
 # step_print("Apply latest terraform state")
 # t.apply_cmd(auto_approve=True, capture_output=False)
@@ -64,7 +77,7 @@ print("Graph state tasks:", ", ".join(graph_state_task_names))
 
 graph_state_task_simulator_name = "graph_state_task_simulator"
 graph_state_task_simulator_arn = task_metadata["graph_state_task_simulator"]['arn']
-graph_state_task_simulator_measurement = get_quantum_task_measurements(
+graph_state_task_simulator_measurement = get_quantum_task_measurement_probabilities(
     graph_state_task_simulator_name,
     graph_state_task_simulator_arn)
 
@@ -76,20 +89,20 @@ print("Benchmarking tasks: " + ", ".join(graph_state_task_qpu_names))
 graph_state_task_qpu_task_arns = [task_metadata[name]['arn'] for name in graph_state_task_qpu_names]
 
 graph_state_task_qpu_task_measurements = [
-    get_quantum_task_measurements(
+    get_quantum_task_measurement_probabilities(
         task_name,
         task_metadata[task_name]['arn']
     ) 
     for task_name in graph_state_task_qpu_names
 ]
-# Calculate the Frobenius norms
-frobenius_norms = [
-    frobenius_norm(graph_state_task_simulator_measurement, measurement_matrix) 
+# Calculate the fidelity using TVD
+fidelities = [
+    fidelity(graph_state_task_simulator_measurement, measurement_matrix) 
     for measurement_matrix in graph_state_task_qpu_task_measurements
 ]
-print("Frobenius norm for each task: " + "".join([str(norm) for norm in frobenius_norms]))
+print("Fidelty for each task: " + ", ".join([str(value) for value in fidelities]))
 
 # Find the index of the measurement matrix with the smallest Frobenius norm
-closest_index = np.argmin(frobenius_norms)
+closest_index = np.argmax(fidelities)
 
 print("Closest measurement matrix:", graph_state_task_qpu_names[closest_index])
