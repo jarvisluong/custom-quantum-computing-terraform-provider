@@ -8,8 +8,7 @@ import rustworkx as rx
 
 G = rx.generators.cycle_graph(5)
 
-qc = transpile(GraphState(rx.adjacency_matrix(G)), basis_gates=['cz', 'xy', 'ccnot', 'cnot', 'cphaseshift', 'cphaseshift00', 'cphaseshift01', 'cphaseshift10', 'cswap', 'h', 'i', 'iswap', 'phaseshift', 'pswap', 'rx', 'ry', 'rz', 's', 'si', 'swap', 't', 'ti', 'x', 'y', 'z'
-])
+qc = transpile(GraphState(rx.adjacency_matrix(G)), basis_gates=['x', 'y', 'z', 'h', 'cnot', 'rx', 'ry', 'rz', 'cx'])
 
 converted_to_aws_qc = adapter.convert_qiskit_to_braket_circuit(qc)
 print(converted_to_aws_qc.to_ir(ir_type = IRType.OPENQASM).source)
