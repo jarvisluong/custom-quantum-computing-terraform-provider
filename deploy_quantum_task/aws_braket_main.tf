@@ -35,10 +35,6 @@ resource "quantumrunners_quantum_circuit" "graph_state_circuit" {
   qasm_content = data.local_file.graph_state.content
 }
 
-resource "quantumrunners_quantum_circuit" "graph_state_circuit_ionq" {
-  qasm_content = data.local_file.graph_state_ionq.content
-}
-
 resource "quantumrunners_task" "ghz_task_simulator" {
   circuit = quantumrunners_quantum_circuit.ghz_circuit.action
   device_id = "arn:aws:braket:::device/quantum-simulator/amazon/sv1"
