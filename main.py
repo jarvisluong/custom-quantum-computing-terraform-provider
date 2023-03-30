@@ -97,7 +97,8 @@ def benchmark_for_task(task_name, task_metadata):
 def poll_task_status():
     while True:
         step_print("Apply latest terraform state")
-        t.apply_cmd(auto_approve=True, capture_output=True)
+        (return_code, stdout, stderr) = t.apply_cmd(auto_approve=True, capture_output=True)
+        print(stdout)
 
         step_print("Get terraform state output")
         (_1, stdout, _2) = t.output_cmd(json=True)

@@ -6,7 +6,7 @@ from qiskit.compiler import transpile
 from qiskit.circuit.library import GraphState
 import rustworkx as rx
 
-G = rx.generators.cycle_graph(5)
+G = rx.generators.cycle_graph(4)
 
 qc = transpile(GraphState(rx.adjacency_matrix(G)), basis_gates=['x', 'y', 'z', 'h', 'cnot', 'rx', 'ry', 'rz', 'cx'])
 
