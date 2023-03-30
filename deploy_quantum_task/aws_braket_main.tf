@@ -111,10 +111,10 @@ output "task_metadata" {
       status = quantumrunners_task.ghz_task_simulator.task_status,
       is_simulator = true
     },
-    # ghz_task_ionq = {
-    #   arn = quantumrunners_task.ghz_task_ionq.task_id,
-    #   status = quantumrunners_task.ghz_task_ionq.task_status
-    # },
+    ghz_task_ionq = {
+      arn = quantumrunners_task.ghz_task_ionq.task_id,
+      status = quantumrunners_task.ghz_task_ionq.task_status
+    },
     ghz_task_rigetti = {
       arn = quantumrunners_task.ghz_task_rigetti.task_id,
       status = quantumrunners_task.ghz_task_rigetti.task_status
@@ -128,10 +128,10 @@ output "task_metadata" {
       status = quantumrunners_task.graph_state_task_simulator.task_status,
       is_simulator = true
     },
-    # graph_state_task_ionq = {
-    #   arn = quantumrunners_task.graph_state_task_ionq.task_id,
-    #   status = quantumrunners_task.graph_state_task_ionq.task_status
-    # },
+    graph_state_task_ionq = {
+      arn = quantumrunners_task.graph_state_task_ionq.task_id,
+      status = quantumrunners_task.graph_state_task_ionq.task_status
+    },
     graph_state_task_rigetti = {
       arn = quantumrunners_task.graph_state_task_rigetti.task_id,
       status = quantumrunners_task.graph_state_task_rigetti.task_status
