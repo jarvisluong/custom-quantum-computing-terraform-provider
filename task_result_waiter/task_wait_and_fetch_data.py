@@ -8,7 +8,7 @@ import time
 
 # Let's use Amazon S3
 braket_config = Config(
-    region_name = 'us-west-1'
+    region_name = 'us-east-1'
 )
 braket = boto3.client('braket', config=braket_config)
 s3 = boto3.resource('s3')

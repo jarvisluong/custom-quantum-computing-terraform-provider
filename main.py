@@ -36,7 +36,10 @@ def get_quantum_task_measurement_probabilities(name, arn):
         output = None
         # We are assuming the measurementProbabilities is arranged in alphabetical order
         if 'measurementProbabilities' in content:
-            output = np.array(list(content['measurementProbabilities'].values()))
+            permutations = list(itertools.product(range(2), repeat=len(content['measuredQubits'])))
+            all_possible_states = [''.join([str(num) for num in permutation]) for permutation in permutations]
+            all_states_count = [_.get(content['measurementProbabilities'], state, 0) for state in all_possible_states]
+            output = np.array(all_states_count)
         else:
             permutations = list(itertools.product(range(2), repeat=len(content['measuredQubits'])))
             all_possible_states = [''.join([str(num) for num in permutation]) for permutation in permutations]
