@@ -163,6 +163,12 @@ func (r *taskResource) Read(ctx context.Context, req resource.ReadRequest, resp 
 		return
 	}
 
+	if state.TaskStatus.ValueString() == "COMPLETED" ||
+		state.TaskStatus.ValueString() == "FAILED" ||
+		state.TaskStatus.ValueString() == "CANCELLED" {
+		return
+	}
+
 	taskDetail, err := r.client.GetQuantumTask(ctx, &braket.GetQuantumTaskInput{
 		QuantumTaskArn: aws.String(state.TaskId.ValueString()),
 	})
