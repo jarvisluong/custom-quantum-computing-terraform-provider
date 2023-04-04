@@ -8,6 +8,19 @@ from botocore.config import Config
 from arn import Arn
 import itertools
 
+FIDELITY_FORMULA = 'hellinger'
+
+def total_variation_distance(P, Q):
+    return 0.5 * np.sum(np.abs(P - Q))
+
+def hellinger_fidelity(P, Q):
+    return np.sum(np.sqrt(P * Q))
+
+FIDELITY_IMPL = {
+    'hellinger': hellinger_fidelity,
+    'total_variation_distance': total_variation_distance
+}
+
 s3 = boto3.resource('s3')
 
 t = Terraform(working_dir='./deploy_quantum_task')
@@ -51,11 +64,8 @@ def get_quantum_task_measurement_probabilities(name, arn):
         print(f"Measurement probability for {name}: {str(output)}")
         return output
 
-def total_variation_distance(P, Q):
-    return 0.5 * np.sum(np.abs(P - Q))
-
 def fidelity(P, Q):
-    return 1 - total_variation_distance(P, Q)    
+    return FIDELITY_IMPL[FIDELITY_FORMULA](P, Q)
 
 def benchmark_for_task(task_name, task_metadata):
     step_print(f"Benchmark for task ${task_name}")
@@ -124,6 +134,8 @@ all_task_names = _.filter_(
     list(task_metadata.keys()),
     lambda name: task_metadata[name]['status'] == 'COMPLETED'
 )
+
+step_print(f"Using ${FIDELITY_FORMULA} for benchmarking")
 
 benchmark_for_task("graph_state_task", task_metadata)
 benchmark_for_task("ghz_task", task_metadata)
