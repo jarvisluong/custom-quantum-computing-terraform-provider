@@ -1,24 +1,37 @@
+===== Using $hellinger for benchmarking =====
+
+
 ===== Benchmark for task $graph_state_task =====
-Graph state tasks: graph_state_task_lucy, graph_state_task_rigetti, graph_state_task_simulator
-Measurement probability for graph_state_task_simulator: [0.021 0.025 0.032 0.026 0.039 0.021 0.031 0.037 0.032 0.024 0.029 0.037
- 0.032 0.044 0.034 0.032 0.031 0.037 0.036 0.031 0.035 0.038 0.033 0.026
- 0.02  0.035 0.029 0.025 0.032 0.042 0.024 0.03 ]
-Benchmarking tasks: graph_state_task_lucy, graph_state_task_rigetti
-Measurement probability for graph_state_task_lucy: [0.035 0.047 0.04  0.05  0.038 0.022 0.028 0.03  0.048 0.024 0.049 0.028
- 0.04  0.027 0.033 0.022 0.041 0.042 0.018 0.031 0.031 0.02  0.027 0.021
- 0.031 0.012 0.032 0.026 0.039 0.019 0.022 0.027]
-Measurement probability for graph_state_task_rigetti: [0.027 0.055 0.028 0.021 0.027 0.032 0.03  0.027 0.024 0.059 0.016 0.033
- 0.029 0.026 0.023 0.033 0.044 0.044 0.049 0.023 0.036 0.026 0.034 0.028
- 0.023 0.038 0.022 0.027 0.024 0.031 0.038 0.023]
-Fidelty for each task: 0.85, 0.858
-Closest measurement matrix: graph_state_task_rigetti
+Graph state tasks: graph_state_task_ionq, graph_state_task_lucy, graph_state_task_rigetti, graph_state_task_simulator
+Measurement probability for graph_state_task_simulator: [0.049 0.069 0.072 0.063 0.068 0.058 0.059 0.062 0.045 0.065 0.059 0.064
+ 0.072 0.061 0.067 0.067]
+Benchmarking tasks: graph_state_task_ionq, graph_state_task_lucy, graph_state_task_rigetti
+Measurement probability for graph_state_task_ionq: [0.03  0.036 0.078 0.078 0.095 0.085 0.042 0.062 0.049 0.045 0.106 0.091
+ 0.063 0.05  0.048 0.042]
+Measurement probability for graph_state_task_lucy: [0.1   0.052 0.084 0.046 0.078 0.06  0.082 0.067 0.058 0.054 0.065 0.053
+ 0.043 0.048 0.048 0.062]
+Measurement probability for graph_state_task_rigetti: [0.033 0.067 0.041 0.058 0.06  0.07  0.063 0.089 0.06  0.077 0.036 0.066
+ 0.043 0.098 0.06  0.079]
+Fidelty for each task: 0.9843594674856404, 0.9887449318158594, 0.9887311194646886
+Closest measurement matrix: graph_state_task_lucy
 
 
 ===== Benchmark for task $ghz_task =====
-Graph state tasks: ghz_task_lucy, ghz_task_rigetti, ghz_task_simulator
-Measurement probability for ghz_task_simulator: [0.526 0.    0.    0.    0.    0.    0.    0.474]
-Benchmarking tasks: ghz_task_lucy, ghz_task_rigetti
-Measurement probability for ghz_task_lucy: [0.316 0.058 0.074 0.075 0.078 0.077 0.062 0.26 ]
-Measurement probability for ghz_task_rigetti: [0.247 0.034 0.072 0.04  0.082 0.068 0.237 0.22 ]
-Fidelty for each task: 0.5760000000000001, 0.46699999999999997
-Closest measurement matrix: ghz_task_lucy
+Graph state tasks: ghz_task_ionq, ghz_task_lucy, ghz_task_rigetti, ghz_task_simulator
+Measurement probability for ghz_task_simulator: [0.58 0.   0.   0.   0.   0.   0.   0.42]
+Benchmarking tasks: ghz_task_ionq, ghz_task_lucy, ghz_task_rigetti
+Measurement probability for ghz_task_ionq: [0.56 0.01 0.   0.01 0.   0.   0.01 0.41]
+Measurement probability for ghz_task_lucy: [0.39 0.03 0.12 0.06 0.09 0.09 0.03 0.19]
+Measurement probability for ghz_task_rigetti: [0.38 0.04 0.02 0.2  0.03 0.01 0.03 0.29]
+Fidelty for each task: 0.9848821523759288, 0.7580938158602752, 0.818466351104523
+Closest measurement matrix: ghz_task_ionq
+
+
+===== Benchmark for task $hidden_linear_function =====
+Graph state tasks: hidden_linear_function_lucy, hidden_linear_function_rigetti, hidden_linear_function_simulator
+Measurement probability for hidden_linear_function_simulator: [0.    0.273 0.23  0.    0.261 0.    0.    0.236]
+Benchmarking tasks: hidden_linear_function_lucy, hidden_linear_function_rigetti
+Measurement probability for hidden_linear_function_lucy: [0.138 0.115 0.142 0.154 0.078 0.173 0.101 0.099]
+Measurement probability for hidden_linear_function_rigetti: [0.1   0.102 0.081 0.112 0.158 0.139 0.109 0.199]
+Fidelty for each task: 0.6534414555343454, 0.7231461719972854
+Closest measurement matrix: hidden_linear_function_rigetti

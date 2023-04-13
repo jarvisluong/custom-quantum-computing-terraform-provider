@@ -139,3 +139,4 @@ step_print(f"Using ${FIDELITY_FORMULA} for benchmarking")
 
 benchmark_for_task("graph_state_task", task_metadata)
 benchmark_for_task("ghz_task", task_metadata)
+benchmark_for_task("hidden_linear_function", task_metadata)
