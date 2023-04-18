@@ -23,7 +23,7 @@ FIDELITY_IMPL = {
 
 s3 = boto3.resource('s3')
 
-t = Terraform(working_dir='./deploy_quantum_task')
+t = Terraform(working_dir='./evaluate_quantum_devices')
 
 def step_print(msg):
     print("\n")
