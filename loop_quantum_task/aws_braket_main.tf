@@ -16,13 +16,18 @@ variable "output_key_prefix" {
   default = "test"
 }
 
+variable "qasm_circuit" {
+  type = string
+  required = true
+}
+
 variable "quantum_device_arn" {
   type = string
   required = true
 }
 
 resource "quantumrunners_quantum_circuit" "circuit" {
-  qasm_content = data.local_file.circuit.content
+  qasm_content = variable.qasm_circuit
 }
 
 resource "quantumrunners_task" "ghz_task_simulator" {
