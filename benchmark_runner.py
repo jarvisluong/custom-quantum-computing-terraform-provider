@@ -67,7 +67,7 @@ def get_quantum_task_measurement_probabilities(name, arn):
 def fidelity(P, Q):
     return FIDELITY_IMPL[FIDELITY_FORMULA](P, Q)
 
-def benchmark_for_task(task_name, task_metadata):
+def benchmark_for_task(all_task_names, task_name, task_metadata):
     step_print(f"Benchmark for task ${task_name}")
     task_names = _.filter_(
         all_task_names,
@@ -105,6 +105,7 @@ def benchmark_for_task(task_name, task_metadata):
     closest_index = np.argmax(fidelities)
 
     print("Closest measurement matrix:", task_qpu_names[closest_index])
+    return task_qpu_names[closest_index]
 
 
 def poll_task_status():
@@ -129,14 +130,26 @@ def poll_task_status():
         print(f"Tasks {', '.join(any_pending_tasks)} are still pending, re-running in 5 seconds")
         time.sleep(5.0)
 
-task_metadata = poll_task_status()
-all_task_names = _.filter_(
-    list(task_metadata.keys()),
-    lambda name: task_metadata[name]['status'] == 'COMPLETED'
-)
+# Find most frequent element in a list
+def most_frequent(List):
+    return max(set(List), key = List.count)
+ 
 
-step_print(f"Using ${FIDELITY_FORMULA} for benchmarking")
+def main(param_queue):
+    while True:
+        task_metadata = poll_task_status()
+        all_task_names = _.filter_(
+            list(task_metadata.keys()),
+            lambda name: task_metadata[name]['status'] == 'COMPLETED'
+        )
+        step_print(f"Using ${FIDELITY_FORMULA} for benchmarking")
 
-benchmark_for_task("graph_state_task", task_metadata)
-benchmark_for_task("ghz_task", task_metadata)
-benchmark_for_task("hidden_linear_function", task_metadata)
+        results = [
+            benchmark_for_task(all_task_names, "graph_state_task", task_metadata),
+            benchmark_for_task(all_task_names, "ghz_task", task_metadata),
+            benchmark_for_task(all_task_names, "hidden_linear_function", task_metadata),
+        ]
+
+        best_device_arn = most_frequent(results)
+        param_queue.put(best_device_arn)
+        time.sleep(3600)  # Sleep for an hour
