@@ -150,6 +150,6 @@ def main(param_queue):
             benchmark_for_task(all_task_names, "hidden_linear_function", task_metadata),
         ]
 
-        best_device_arn = most_frequent(results)
+        best_device_arn = task_metadata[most_frequent(results)]['device']
         param_queue.put(best_device_arn)
         time.sleep(3600)  # Sleep for an hour

@@ -152,53 +152,65 @@ output "task_metadata" {
     ghz_task_simulator = {
       arn = quantumrunners_task.ghz_task_simulator.task_id,
       status = quantumrunners_task.ghz_task_simulator.task_status,
+      device = quantumrunners_task.ghz_task_simulator.device_id,
       is_simulator = true
     },
     ghz_task_ionq = {
       arn = quantumrunners_task.ghz_task_ionq.task_id,
+      device = quantumrunners_task.ghz_task_ionq.device_id,
       status = quantumrunners_task.ghz_task_ionq.task_status
     },
     ghz_task_rigetti = {
       arn = quantumrunners_task.ghz_task_rigetti.task_id,
+      device = quantumrunners_task.ghz_task_rigetti.device_id,
       status = quantumrunners_task.ghz_task_rigetti.task_status
     },
     ghz_task_lucy = {
       arn = quantumrunners_task.ghz_task_lucy.task_id,
-      status = quantumrunners_task.ghz_task_lucy.task_status
+      status = quantumrunners_task.ghz_task_lucy.task_status,
+      device = quantumrunners_task.ghz_task_lucy.device_id,
     },
     graph_state_task_simulator = {
       arn = quantumrunners_task.graph_state_task_simulator.task_id,
       status = quantumrunners_task.graph_state_task_simulator.task_status,
+      device = quantumrunners_task.graph_state_task_simulator.device_id,
       is_simulator = true
     },
     graph_state_task_ionq = {
       arn = quantumrunners_task.graph_state_task_ionq.task_id,
-      status = quantumrunners_task.graph_state_task_ionq.task_status
+      status = quantumrunners_task.graph_state_task_ionq.task_status,
+      device = quantumrunners_task.graph_state_task_ionq.device_id,
     },
     graph_state_task_rigetti = {
       arn = quantumrunners_task.graph_state_task_rigetti.task_id,
-      status = quantumrunners_task.graph_state_task_rigetti.task_status
+      status = quantumrunners_task.graph_state_task_rigetti.task_status,
+      device = quantumrunners_task.graph_state_task_rigetti.device_id,
     },
     graph_state_task_lucy = {
       arn = quantumrunners_task.graph_state_task_lucy.task_id,
-      status = quantumrunners_task.graph_state_task_lucy.task_status
+      status = quantumrunners_task.graph_state_task_lucy.task_status,
+      device = quantumrunners_task.graph_state_task_lucy.device_id,
     },
     hidden_linear_function_simulator = {
       arn = quantumrunners_task.hidden_linear_function_simulator.task_id,
       status = quantumrunners_task.hidden_linear_function_simulator.task_status,
+      device = quantumrunners_task.hidden_linear_function_simulator.device_id,
       is_simulator = true
     },
     # hidden_linear_function_ionq = {
     #   arn = quantumrunners_task.hidden_linear_function_ionq.task_id,
-    #   status = quantumrunners_task.hidden_linear_function_ionq.task_status
+    #   status = quantumrunners_task.hidden_linear_function_ionq.task_status,
+    #   device = quantumrunners_task.hidden_linear_function_ionq.device_id,
     # },
     hidden_linear_function_rigetti = {
       arn = quantumrunners_task.hidden_linear_function_rigetti.task_id,
-      status = quantumrunners_task.hidden_linear_function_rigetti.task_status
+      status = quantumrunners_task.hidden_linear_function_rigetti.task_status,
+      device = quantumrunners_task.hidden_linear_function_rigetti.device_id,
     },
     hidden_linear_function_lucy = {
       arn = quantumrunners_task.hidden_linear_function_lucy.task_id,
-      status = quantumrunners_task.hidden_linear_function_lucy.task_status
+      status = quantumrunners_task.hidden_linear_function_lucy.task_status,
+      device = quantumrunners_task.hidden_linear_function_lucy.device_id,
     }
   }
 }
