@@ -1,7 +1,11 @@
 ````mermaid
 graph TD
-  X[Circuit Exporter] --> A1
-  X --> B1
+  subgraph X[Circuit Exporter]
+   X1[Quantum circuit] --> X2[Qiskit Transpiler] 
+    
+  end
+  X --> A
+  X --> B
   subgraph A[ ]
     A1[Main Circuit Execution]
     R1[Circuit Deployer/Executor]
@@ -22,4 +26,5 @@ graph TD
   subgraph E[ ]
     F[Terraform custom provider] -->|depends on| H[Cloud provider APIs]
   end
+
 ```
