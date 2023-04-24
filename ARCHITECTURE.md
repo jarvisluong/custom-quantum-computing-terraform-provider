@@ -1,25 +1,25 @@
 ````mermaid
 graph TD
-  X --> A1
+  X[Circuit Exporter] --> A1
   X --> B1
-  subgraph A
-    A1[Process A]
-    R1[Wait for result]
+  subgraph A[ ]
+    A1[Main Circuit Execution]
+    R1[Circuit Deployer/Executor]
     A1 --> R1
     R1 --> A1
+    A1 -->|uses| C[Terraform deployment script]
   end
-  subgraph B
-    B1[Process B]
-    R2[Wait for result]
+  subgraph B[ ]
+    B1[Benchmark Quantum Device executor]
+    R2[Benchmark Result Collection/Comparision]
     B1 --> R2
     R2 --> B1
+    B1 -->|uses| D[Terraform deployment script]
   end
-  A1 -->|uses| C
-  B1 -->|uses| D
+  B1 --> |Send best quantum computer info| A1
   C -->|implements| E
   D -->|implements| E
-  B1 --> |signals value| A1
-  subgraph E
-    F --> H
+  subgraph E[ ]
+    F[Terraform custom provider] -->|depends on| H[Cloud provider APIs]
   end
 ```
