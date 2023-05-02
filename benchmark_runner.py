@@ -8,7 +8,7 @@ from botocore.config import Config
 from arn import Arn
 import itertools
 
-FIDELITY_FORMULA = 'hellinger'
+FIDELITY_FORMULA = 'total_variation_distance'
 
 def total_variation_distance(P, Q):
     return 0.5 * np.sum(np.abs(P - Q))
