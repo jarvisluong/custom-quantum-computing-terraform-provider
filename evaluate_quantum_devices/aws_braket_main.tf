@@ -197,11 +197,11 @@ output "task_metadata" {
       device = quantumrunners_task.hidden_linear_function_simulator.device_id,
       is_simulator = true
     },
-    # hidden_linear_function_ionq = {
-    #   arn = quantumrunners_task.hidden_linear_function_ionq.task_id,
-    #   status = quantumrunners_task.hidden_linear_function_ionq.task_status,
-    #   device = quantumrunners_task.hidden_linear_function_ionq.device_id,
-    # },
+    hidden_linear_function_ionq = {
+      arn = quantumrunners_task.hidden_linear_function_ionq.task_id,
+      status = quantumrunners_task.hidden_linear_function_ionq.task_status,
+      device = quantumrunners_task.hidden_linear_function_ionq.device_id,
+    },
     hidden_linear_function_rigetti = {
       arn = quantumrunners_task.hidden_linear_function_rigetti.task_id,
       status = quantumrunners_task.hidden_linear_function_rigetti.task_status,

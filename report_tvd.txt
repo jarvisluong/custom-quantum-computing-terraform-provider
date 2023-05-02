@@ -1,4 +1,4 @@
-===== Using $hellinger for benchmarking =====
+===== Using $total_variation_distance for benchmarking =====
 
 
 ===== Benchmark for task $graph_state_task =====
@@ -12,8 +12,8 @@ Measurement probability for graph_state_task_lucy: [0.1   0.052 0.084 0.046 0.07
  0.043 0.048 0.048 0.062]
 Measurement probability for graph_state_task_rigetti: [0.033 0.067 0.041 0.058 0.06  0.07  0.063 0.089 0.06  0.077 0.036 0.066
  0.043 0.098 0.06  0.079]
-Fidelty for each task: 0.9843594674856404, 0.9887449318158594, 0.9887311194646886
-Closest measurement matrix: graph_state_task_lucy
+Fidelty for each task: 0.153, 0.12200000000000003, 0.121
+Closest measurement matrix: graph_state_task_ionq
 
 
 ===== Benchmark for task $ghz_task =====
@@ -23,8 +23,8 @@ Benchmarking tasks: ghz_task_ionq, ghz_task_lucy, ghz_task_rigetti
 Measurement probability for ghz_task_ionq: [0.56 0.01 0.   0.01 0.   0.   0.01 0.41]
 Measurement probability for ghz_task_lucy: [0.39 0.03 0.12 0.06 0.09 0.09 0.03 0.19]
 Measurement probability for ghz_task_rigetti: [0.38 0.04 0.02 0.2  0.03 0.01 0.03 0.29]
-Fidelty for each task: 0.9848821523759288, 0.7580938158602752, 0.818466351104523
-Closest measurement matrix: ghz_task_ionq
+Fidelty for each task: 0.02999999999999996, 0.41999999999999993, 0.32999999999999996
+Closest measurement matrix: ghz_task_lucy
 
 
 ===== Benchmark for task $hidden_linear_function =====
@@ -34,5 +34,5 @@ Benchmarking tasks: hidden_linear_function_ionq, hidden_linear_function_lucy, hi
 Measurement probability for hidden_linear_function_ionq: [0.03  0.19  0.241 0.018 0.262 0.028 0.03  0.201]
 Measurement probability for hidden_linear_function_lucy: [0.138 0.115 0.142 0.154 0.078 0.173 0.101 0.099]
 Measurement probability for hidden_linear_function_rigetti: [0.1   0.102 0.081 0.112 0.158 0.139 0.109 0.199]
-Fidelty for each task: 0.942483222579875, 0.6534414555343454, 0.7231461719972854
-Closest measurement matrix: hidden_linear_function_ionq
+Fidelty for each task: 0.11799999999999998, 0.5660000000000001, 0.46
+Closest measurement matrix: hidden_linear_function_lucy
