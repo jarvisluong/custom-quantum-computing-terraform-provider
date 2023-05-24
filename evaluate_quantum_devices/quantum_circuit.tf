@@ -1,14 +1,14 @@
-data "local_file" "ghz2" {
-  filename = "ghz2.qasm"
+data "local_file" "graph_state2" {
+  filename = "graph_state2.qasm"
 }
 
-data "local_file" "ghz3" {
-  filename = "ghz3.qasm"
+data "local_file" "graph_state3" {
+  filename = "graph_state3.qasm"
 }
-data "local_file" "ghz4" {
-  filename = "ghz4.qasm"
+data "local_file" "graph_state4" {
+  filename = "graph_state4.qasm"
 }
 
-data "local_file" "ghz5" {
-  filename = "ghz5.qasm"
+data "local_file" "graph_state5" {
+  filename = "graph_state5.qasm"
 }

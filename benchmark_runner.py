@@ -135,7 +135,7 @@ def most_frequent(List):
     return max(set(List), key = List.count)
  
 
-def main(param_queue):
+def main(param_queue = None):
     while True:
         task_metadata = poll_task_status()
         all_task_names = _.filter_(
@@ -145,11 +145,16 @@ def main(param_queue):
         step_print(f"Using ${FIDELITY_FORMULA} for benchmarking")
 
         results = [
-            benchmark_for_task(all_task_names, "graph_state_task", task_metadata),
-            benchmark_for_task(all_task_names, "ghz_task", task_metadata),
-            benchmark_for_task(all_task_names, "hidden_linear_function", task_metadata),
+            benchmark_for_task(all_task_names, "ghz2_task", task_metadata),
+            benchmark_for_task(all_task_names, "ghz3_task", task_metadata),
+            benchmark_for_task(all_task_names, "ghz4_task", task_metadata),
+            benchmark_for_task(all_task_names, "ghz5_task", task_metadata),
         ]
 
         best_device_arn = task_metadata[most_frequent(results)]['device']
-        param_queue.put(best_device_arn)
+        if param_queue != None:
+            param_queue.put(best_device_arn)
         time.sleep(3600)  # Sleep for an hour
+
+if (__name__ == '__main__'):
+    main()
