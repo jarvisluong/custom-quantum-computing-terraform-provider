@@ -8,13 +8,13 @@ from botocore.config import Config
 from arn import Arn
 import itertools
 
-FIDELITY_FORMULA = 'total_variation_distance'
+FIDELITY_FORMULA = 'hellinger'
 
 def total_variation_distance(P, Q):
     return 0.5 * np.sum(np.abs(P - Q))
 
 def hellinger_fidelity(P, Q):
-    return np.sum(np.sqrt(P * Q))
+    return (1-np.sum((np.sqrt(Q)-np.sqrt(P))**2))**2
 
 FIDELITY_IMPL = {
     'hellinger': hellinger_fidelity,
@@ -110,9 +110,9 @@ def benchmark_for_task(all_task_names, task_name, task_metadata):
 
 def poll_task_status():
     while True:
-        step_print("Apply latest terraform state")
-        (return_code, stdout, stderr) = t.apply_cmd(auto_approve=True, capture_output=True)
-        print(stdout)
+        # step_print("Apply latest terraform state")
+        # (return_code, stdout, stderr) = t.apply_cmd(auto_approve=True, capture_output=True)
+        # print(stdout)
 
         step_print("Get terraform state output")
         (_1, stdout, _2) = t.output_cmd(json=True)
@@ -145,10 +145,10 @@ def main(param_queue = None):
         step_print(f"Using ${FIDELITY_FORMULA} for benchmarking")
 
         results = [
-            benchmark_for_task(all_task_names, "ghz2_task", task_metadata),
-            benchmark_for_task(all_task_names, "ghz3_task", task_metadata),
-            benchmark_for_task(all_task_names, "ghz4_task", task_metadata),
-            benchmark_for_task(all_task_names, "ghz5_task", task_metadata),
+            benchmark_for_task(all_task_names, "graph_state2_task", task_metadata),
+            benchmark_for_task(all_task_names, "graph_state3_task", task_metadata),
+            benchmark_for_task(all_task_names, "graph_state4_task", task_metadata),
+            benchmark_for_task(all_task_names, "graph_state5_task", task_metadata),
         ]
 
         best_device_arn = task_metadata[most_frequent(results)]['device']

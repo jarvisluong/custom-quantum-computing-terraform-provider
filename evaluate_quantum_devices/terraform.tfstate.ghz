@@ -1,0 +1,847 @@
+{
+  "version": 4,
+  "terraform_version": "1.3.8",
+  "serial": 205,
+  "lineage": "8ffc5ca3-6264-76b5-4c11-cc98b885b2e5",
+  "outputs": {
+    "task_metadata": {
+      "value": {
+        "ghz2_task_rigetti": {
+          "arn": "arn:aws:braket:us-west-1:016057055957:quantum-task/aeb9a315-884f-4967-b1ea-6b96493045c6",
+          "device": "arn:aws:braket:us-west-1::device/qpu/rigetti/Aspen-M-3",
+          "status": "COMPLETED"
+        },
+        "ghz2_task_simulator": {
+          "arn": "arn:aws:braket:us-east-1:016057055957:quantum-task/43fabf97-e763-4463-b4ce-eb3830f48e56",
+          "device": "arn:aws:braket:::device/quantum-simulator/amazon/sv1",
+          "is_simulator": true,
+          "status": "COMPLETED"
+        },
+        "ghz3_task_rigetti": {
+          "arn": "arn:aws:braket:us-west-1:016057055957:quantum-task/f5278b81-96dd-4e09-a00f-362187203d3a",
+          "device": "arn:aws:braket:us-west-1::device/qpu/rigetti/Aspen-M-3",
+          "status": "COMPLETED"
+        },
+        "ghz3_task_simulator": {
+          "arn": "arn:aws:braket:us-east-1:016057055957:quantum-task/9245065d-25fc-4076-b664-45990aae0f3c",
+          "device": "arn:aws:braket:::device/quantum-simulator/amazon/sv1",
+          "is_simulator": true,
+          "status": "COMPLETED"
+        },
+        "ghz4_task_rigetti": {
+          "arn": "arn:aws:braket:us-west-1:016057055957:quantum-task/37e4b367-6889-44cc-be16-3208e0afef5a",
+          "device": "arn:aws:braket:us-west-1::device/qpu/rigetti/Aspen-M-3",
+          "status": "COMPLETED"
+        },
+        "ghz4_task_simulator": {
+          "arn": "arn:aws:braket:us-east-1:016057055957:quantum-task/ffe715f5-7c55-4ac2-b39d-f7e729888a95",
+          "device": "arn:aws:braket:::device/quantum-simulator/amazon/sv1",
+          "is_simulator": true,
+          "status": "COMPLETED"
+        },
+        "ghz5_task_rigetti": {
+          "arn": "arn:aws:braket:us-west-1:016057055957:quantum-task/218d8d56-45d3-400d-a5e1-2b84fc0afc98",
+          "device": "arn:aws:braket:us-west-1::device/qpu/rigetti/Aspen-M-3",
+          "status": "COMPLETED"
+        },
+        "ghz5_task_simulator": {
+          "arn": "arn:aws:braket:us-east-1:016057055957:quantum-task/fddeb857-fec6-4542-a1c1-885fa0bef7b7",
+          "device": "arn:aws:braket:::device/quantum-simulator/amazon/sv1",
+          "is_simulator": true,
+          "status": "COMPLETED"
+        }
+      },
+      "type": [
+        "object",
+        {
+          "ghz2_task_rigetti": [
+            "object",
+            {
+              "arn": "string",
+              "device": "string",
+              "status": "string"
+            }
+          ],
+          "ghz2_task_simulator": [
+            "object",
+            {
+              "arn": "string",
+              "device": "string",
+              "is_simulator": "bool",
+              "status": "string"
+            }
+          ],
+          "ghz3_task_rigetti": [
+            "object",
+            {
+              "arn": "string",
+              "device": "string",
+              "status": "string"
+            }
+          ],
+          "ghz3_task_simulator": [
+            "object",
+            {
+              "arn": "string",
+              "device": "string",
+              "is_simulator": "bool",
+              "status": "string"
+            }
+          ],
+          "ghz4_task_rigetti": [
+            "object",
+            {
+              "arn": "string",
+              "device": "string",
+              "status": "string"
+            }
+          ],
+          "ghz4_task_simulator": [
+            "object",
+            {
+              "arn": "string",
+              "device": "string",
+              "is_simulator": "bool",
+              "status": "string"
+            }
+          ],
+          "ghz5_task_rigetti": [
+            "object",
+            {
+              "arn": "string",
+              "device": "string",
+              "status": "string"
+            }
+          ],
+          "ghz5_task_simulator": [
+            "object",
+            {
+              "arn": "string",
+              "device": "string",
+              "is_simulator": "bool",
+              "status": "string"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "resources": [
+    {
+      "mode": "data",
+      "type": "aws_caller_identity",
+      "name": "current",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "account_id": "016057055957",
+            "arn": "arn:aws:sts::016057055957:assumed-role/OrganizationAccountAccessRole/Jarvis",
+            "id": "016057055957",
+            "user_id": "AROAQHPITHLK5XRM6V3XD:Jarvis"
+          },
+          "sensitive_attributes": []
+        }
+      ]
+    },
+    {
+      "mode": "data",
+      "type": "local_file",
+      "name": "ghz2",
+      "provider": "provider[\"registry.terraform.io/hashcorp/local\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "content": "OPENQASM 3.0;\nbit[2] b;\nqubit[2] q;\nh q[0];\nh q[1];\nb[0] = measure q[0];\nb[1] = measure q[1];\n",
+            "content_base64": "T1BFTlFBU00gMy4wOwpiaXRbMl0gYjsKcXViaXRbMl0gcTsKaCBxWzBdOwpoIHFbMV07CmJbMF0gPSBtZWFzdXJlIHFbMF07CmJbMV0gPSBtZWFzdXJlIHFbMV07Cg==",
+            "filename": "ghz2.qasm",
+            "id": "44ec63d92b2608daa650ee35f8f7725a78bc7d39"
+          },
+          "sensitive_attributes": []
+        }
+      ]
+    },
+    {
+      "mode": "data",
+      "type": "local_file",
+      "name": "ghz3",
+      "provider": "provider[\"registry.terraform.io/hashcorp/local\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "content": "OPENQASM 3.0;\nbit[3] b;\nqubit[3] q;\nh q[0];\ncnot q[0], q[1];\nh q[1];\ncnot q[0], q[2];\ncnot q[1], q[2];\nh q[2];\nb[0] = measure q[0];\nb[1] = measure q[1];\nb[2] = measure q[2];",
+            "content_base64": "T1BFTlFBU00gMy4wOwpiaXRbM10gYjsKcXViaXRbM10gcTsKaCBxWzBdOwpjbm90IHFbMF0sIHFbMV07CmggcVsxXTsKY25vdCBxWzBdLCBxWzJdOwpjbm90IHFbMV0sIHFbMl07CmggcVsyXTsKYlswXSA9IG1lYXN1cmUgcVswXTsKYlsxXSA9IG1lYXN1cmUgcVsxXTsKYlsyXSA9IG1lYXN1cmUgcVsyXTs=",
+            "filename": "ghz3.qasm",
+            "id": "1d0bb5e0cae5652fdedf92a83b8e0759d63b58c1"
+          },
+          "sensitive_attributes": []
+        }
+      ]
+    },
+    {
+      "mode": "data",
+      "type": "local_file",
+      "name": "ghz4",
+      "provider": "provider[\"registry.terraform.io/hashcorp/local\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "content": "OPENQASM 3.0;\nbit[4] b;\nqubit[4] q;\nh q[0];\ncnot q[0], q[1];\nh q[1];\ncnot q[1], q[2];\nh q[2];\ncnot q[0], q[3];\ncnot q[2], q[3];\nh q[3];\nb[0] = measure q[0];\nb[1] = measure q[1];\nb[2] = measure q[2];\nb[3] = measure q[3];\n",
+            "content_base64": "T1BFTlFBU00gMy4wOwpiaXRbNF0gYjsKcXViaXRbNF0gcTsKaCBxWzBdOwpjbm90IHFbMF0sIHFbMV07CmggcVsxXTsKY25vdCBxWzFdLCBxWzJdOwpoIHFbMl07CmNub3QgcVswXSwgcVszXTsKY25vdCBxWzJdLCBxWzNdOwpoIHFbM107CmJbMF0gPSBtZWFzdXJlIHFbMF07CmJbMV0gPSBtZWFzdXJlIHFbMV07CmJbMl0gPSBtZWFzdXJlIHFbMl07CmJbM10gPSBtZWFzdXJlIHFbM107Cg==",
+            "filename": "ghz4.qasm",
+            "id": "db1452d7d64d6b7e6dc40faf396f48d495acbf50"
+          },
+          "sensitive_attributes": []
+        }
+      ]
+    },
+    {
+      "mode": "data",
+      "type": "local_file",
+      "name": "ghz5",
+      "provider": "provider[\"registry.terraform.io/hashcorp/local\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "content": "OPENQASM 3.0;\nbit[5] b;\nqubit[5] q;\nh q[0];\ncnot q[0], q[1];\nh q[1];\ncnot q[1], q[2];\nh q[2];\ncnot q[2], q[3];\nh q[3];\ncnot q[0], q[4];\ncnot q[3], q[4];\nh q[4];\nb[0] = measure q[0];\nb[1] = measure q[1];\nb[2] = measure q[2];\nb[3] = measure q[3];\nb[4] = measure q[4];",
+            "content_base64": "T1BFTlFBU00gMy4wOwpiaXRbNV0gYjsKcXViaXRbNV0gcTsKaCBxWzBdOwpjbm90IHFbMF0sIHFbMV07CmggcVsxXTsKY25vdCBxWzFdLCBxWzJdOwpoIHFbMl07CmNub3QgcVsyXSwgcVszXTsKaCBxWzNdOwpjbm90IHFbMF0sIHFbNF07CmNub3QgcVszXSwgcVs0XTsKaCBxWzRdOwpiWzBdID0gbWVhc3VyZSBxWzBdOwpiWzFdID0gbWVhc3VyZSBxWzFdOwpiWzJdID0gbWVhc3VyZSBxWzJdOwpiWzNdID0gbWVhc3VyZSBxWzNdOwpiWzRdID0gbWVhc3VyZSBxWzRdOw==",
+            "filename": "ghz5.qasm",
+            "id": "31566f94bfa713149babccbfa9c99fb0abe7d0b0"
+          },
+          "sensitive_attributes": []
+        }
+      ]
+    },
+    {
+      "mode": "data",
+      "type": "quantumrunners_devices",
+      "name": "devices_eu_west_2",
+      "provider": "provider[\"hashicorp.com/edu/quantumrunners\"].euwest2",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "devices": [
+              {
+                "arn": "arn:aws:braket:::device/quantum-simulator/amazon/tn1",
+                "name": "TN1",
+                "provider_name": "Amazon Braket",
+                "status": "ONLINE",
+                "type": "SIMULATOR"
+              },
+              {
+                "arn": "arn:aws:braket:::device/quantum-simulator/amazon/sv1",
+                "name": "SV1",
+                "provider_name": "Amazon Braket",
+                "status": "ONLINE",
+                "type": "SIMULATOR"
+              },
+              {
+                "arn": "arn:aws:braket:::device/quantum-simulator/amazon/dm1",
+                "name": "dm1",
+                "provider_name": "Amazon Braket",
+                "status": "ONLINE",
+                "type": "SIMULATOR"
+              },
+              {
+                "arn": "arn:aws:braket:eu-west-2::device/qpu/oqc/Lucy",
+                "name": "Lucy",
+                "provider_name": "Oxford",
+                "status": "OFFLINE",
+                "type": "QPU"
+              }
+            ]
+          },
+          "sensitive_attributes": []
+        }
+      ]
+    },
+    {
+      "mode": "data",
+      "type": "quantumrunners_devices",
+      "name": "devices_us_east_1",
+      "provider": "provider[\"hashicorp.com/edu/quantumrunners\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "devices": [
+              {
+                "arn": "arn:aws:braket:us-east-1::device/qpu/ionq/Aria-1",
+                "name": "Aria 1",
+                "provider_name": "IonQ",
+                "status": "OFFLINE",
+                "type": "QPU"
+              },
+              {
+                "arn": "arn:aws:braket:us-east-1::device/qpu/quera/Aquila",
+                "name": "Aquila",
+                "provider_name": "QuEra",
+                "status": "ONLINE",
+                "type": "QPU"
+              },
+              {
+                "arn": "arn:aws:braket:us-east-1::device/qpu/ionq/Harmony",
+                "name": "Harmony",
+                "provider_name": "IonQ",
+                "status": "ONLINE",
+                "type": "QPU"
+              },
+              {
+                "arn": "arn:aws:braket:::device/quantum-simulator/amazon/tn1",
+                "name": "TN1",
+                "provider_name": "Amazon Braket",
+                "status": "ONLINE",
+                "type": "SIMULATOR"
+              },
+              {
+                "arn": "arn:aws:braket:::device/quantum-simulator/amazon/sv1",
+                "name": "SV1",
+                "provider_name": "Amazon Braket",
+                "status": "ONLINE",
+                "type": "SIMULATOR"
+              },
+              {
+                "arn": "arn:aws:braket:us-east-1::device/qpu/xanadu/Borealis",
+                "name": "Borealis",
+                "provider_name": "Xanadu",
+                "status": "ONLINE",
+                "type": "QPU"
+              },
+              {
+                "arn": "arn:aws:braket:::device/quantum-simulator/amazon/dm1",
+                "name": "dm1",
+                "provider_name": "Amazon Braket",
+                "status": "ONLINE",
+                "type": "SIMULATOR"
+              }
+            ]
+          },
+          "sensitive_attributes": []
+        }
+      ]
+    },
+    {
+      "mode": "data",
+      "type": "quantumrunners_devices",
+      "name": "devices_us_west_1",
+      "provider": "provider[\"hashicorp.com/edu/quantumrunners\"].uswest1",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "devices": [
+              {
+                "arn": "arn:aws:braket:::device/qpu/rigetti/Aspen-10",
+                "name": "Aspen-10",
+                "provider_name": "Rigetti",
+                "status": "RETIRED",
+                "type": "QPU"
+              },
+              {
+                "arn": "arn:aws:braket:us-west-1::device/qpu/rigetti/Aspen-M-2",
+                "name": "Aspen-M-2",
+                "provider_name": "Rigetti",
+                "status": "RETIRED",
+                "type": "QPU"
+              },
+              {
+                "arn": "arn:aws:braket:::device/quantum-simulator/amazon/sv1",
+                "name": "SV1",
+                "provider_name": "Amazon Braket",
+                "status": "ONLINE",
+                "type": "SIMULATOR"
+              },
+              {
+                "arn": "arn:aws:braket:::device/quantum-simulator/amazon/dm1",
+                "name": "dm1",
+                "provider_name": "Amazon Braket",
+                "status": "ONLINE",
+                "type": "SIMULATOR"
+              },
+              {
+                "arn": "arn:aws:braket:::device/qpu/rigetti/Aspen-8",
+                "name": "Aspen-8",
+                "provider_name": "Rigetti",
+                "status": "RETIRED",
+                "type": "QPU"
+              },
+              {
+                "arn": "arn:aws:braket:us-west-1::device/qpu/rigetti/Aspen-M-3",
+                "name": "Aspen-M-3",
+                "provider_name": "Rigetti",
+                "status": "ONLINE",
+                "type": "QPU"
+              },
+              {
+                "arn": "arn:aws:braket:::device/qpu/rigetti/Aspen-9",
+                "name": "Aspen-9",
+                "provider_name": "Rigetti",
+                "status": "RETIRED",
+                "type": "QPU"
+              },
+              {
+                "arn": "arn:aws:braket:us-west-1::device/qpu/rigetti/Aspen-M-1",
+                "name": "Aspen-M-1",
+                "provider_name": "Rigetti",
+                "status": "RETIRED",
+                "type": "QPU"
+              },
+              {
+                "arn": "arn:aws:braket:::device/qpu/rigetti/Aspen-11",
+                "name": "Aspen-11",
+                "provider_name": "Rigetti",
+                "status": "RETIRED",
+                "type": "QPU"
+              }
+            ]
+          },
+          "sensitive_attributes": []
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_iam_role",
+      "name": "braket_execution",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:iam::016057055957:role/service-role/AmazonBraketJobsExecutionRole",
+            "assume_role_policy": "{\"Statement\":[{\"Action\":\"sts:AssumeRole\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"braket.amazonaws.com\"},\"Sid\":\"\"}],\"Version\":\"2012-10-17\"}",
+            "create_date": "2023-03-02T13:55:28Z",
+            "description": "",
+            "force_detach_policies": false,
+            "id": "AmazonBraketJobsExecutionRole",
+            "inline_policy": [],
+            "managed_policy_arns": [
+              "arn:aws:iam::aws:policy/AmazonBraketJobsExecutionPolicy"
+            ],
+            "max_session_duration": 3600,
+            "name": "AmazonBraketJobsExecutionRole",
+            "name_prefix": "",
+            "path": "/service-role/",
+            "permissions_boundary": null,
+            "tags": {},
+            "tags_all": {},
+            "unique_id": "AROAQHPITHLKZYJ4CADQL"
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_iam_service_linked_role",
+      "name": "braket",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:iam::016057055957:role/aws-service-role/braket.amazonaws.com/AWSServiceRoleForAmazonBraket",
+            "aws_service_name": "braket.amazonaws.com",
+            "create_date": "2023-03-02T13:34:23Z",
+            "custom_suffix": "",
+            "description": "",
+            "id": "arn:aws:iam::016057055957:role/aws-service-role/braket.amazonaws.com/AWSServiceRoleForAmazonBraket",
+            "name": "AWSServiceRoleForAmazonBraket",
+            "path": "/aws-service-role/braket.amazonaws.com/",
+            "tags": {},
+            "tags_all": {},
+            "unique_id": "AROAQHPITHLK67H2GZBBO"
+          },
+          "sensitive_attributes": [],
+          "private": "bnVsbA=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_s3_bucket",
+      "name": "braket_result",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"].uswest1",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "acceleration_status": "",
+            "acl": null,
+            "arn": "arn:aws:s3:::amazon-braket-results-016057055957",
+            "bucket": "amazon-braket-results-016057055957",
+            "bucket_domain_name": "amazon-braket-results-016057055957.s3.amazonaws.com",
+            "bucket_prefix": null,
+            "bucket_regional_domain_name": "amazon-braket-results-016057055957.s3.us-west-1.amazonaws.com",
+            "cors_rule": [],
+            "force_destroy": false,
+            "grant": [
+              {
+                "id": "33ebe4b1c4b64967a329f166303de21bc7710251bcc8300e7703aa59a319c2fe",
+                "permissions": [
+                  "FULL_CONTROL"
+                ],
+                "type": "CanonicalUser",
+                "uri": ""
+              }
+            ],
+            "hosted_zone_id": "Z2F56UZL2M1ACD",
+            "id": "amazon-braket-results-016057055957",
+            "lifecycle_rule": [],
+            "logging": [],
+            "object_lock_configuration": [],
+            "object_lock_enabled": false,
+            "policy": "",
+            "region": "us-west-1",
+            "replication_configuration": [],
+            "request_payer": "BucketOwner",
+            "server_side_encryption_configuration": [
+              {
+                "rule": [
+                  {
+                    "apply_server_side_encryption_by_default": [
+                      {
+                        "kms_master_key_id": "",
+                        "sse_algorithm": "AES256"
+                      }
+                    ],
+                    "bucket_key_enabled": false
+                  }
+                ]
+              }
+            ],
+            "tags": {},
+            "tags_all": {},
+            "timeouts": null,
+            "versioning": [
+              {
+                "enabled": false,
+                "mfa_delete": false
+              }
+            ],
+            "website": [],
+            "website_domain": null,
+            "website_endpoint": null
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxMjAwMDAwMDAwMDAwLCJkZWxldGUiOjM2MDAwMDAwMDAwMDAsInJlYWQiOjEyMDAwMDAwMDAwMDAsInVwZGF0ZSI6MTIwMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "data.aws_caller_identity.current"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "quantumrunners_quantum_circuit",
+      "name": "ghz2",
+      "provider": "provider[\"hashicorp.com/edu/quantumrunners\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "action": "{\"braketSchemaHeader\":{\"name\":\"braket.ir.openqasm.program\",\"version\":\"1\"},\"inputs\":{},\"source\":\"OPENQASM 3.0;\\nbit[2] b;\\nqubit[2] q;\\nh q[0];\\nh q[1];\\nb[0] = measure q[0];\\nb[1] = measure q[1];\\n\"}",
+            "last_updated": "Wednesday, 24-May-23 23:17:38 EEST",
+            "qasm_content": "OPENQASM 3.0;\nbit[2] b;\nqubit[2] q;\nh q[0];\nh q[1];\nb[0] = measure q[0];\nb[1] = measure q[1];\n"
+          },
+          "sensitive_attributes": [],
+          "dependencies": [
+            "data.local_file.ghz2"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "quantumrunners_quantum_circuit",
+      "name": "ghz3",
+      "provider": "provider[\"hashicorp.com/edu/quantumrunners\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "action": "{\"braketSchemaHeader\":{\"name\":\"braket.ir.openqasm.program\",\"version\":\"1\"},\"inputs\":{},\"source\":\"OPENQASM 3.0;\\nbit[3] b;\\nqubit[3] q;\\nh q[0];\\ncnot q[0], q[1];\\nh q[1];\\ncnot q[0], q[2];\\ncnot q[1], q[2];\\nh q[2];\\nb[0] = measure q[0];\\nb[1] = measure q[1];\\nb[2] = measure q[2];\"}",
+            "last_updated": "Wednesday, 24-May-23 23:17:38 EEST",
+            "qasm_content": "OPENQASM 3.0;\nbit[3] b;\nqubit[3] q;\nh q[0];\ncnot q[0], q[1];\nh q[1];\ncnot q[0], q[2];\ncnot q[1], q[2];\nh q[2];\nb[0] = measure q[0];\nb[1] = measure q[1];\nb[2] = measure q[2];"
+          },
+          "sensitive_attributes": [],
+          "dependencies": [
+            "data.local_file.ghz3"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "quantumrunners_quantum_circuit",
+      "name": "ghz4",
+      "provider": "provider[\"hashicorp.com/edu/quantumrunners\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "action": "{\"braketSchemaHeader\":{\"name\":\"braket.ir.openqasm.program\",\"version\":\"1\"},\"inputs\":{},\"source\":\"OPENQASM 3.0;\\nbit[4] b;\\nqubit[4] q;\\nh q[0];\\ncnot q[0], q[1];\\nh q[1];\\ncnot q[1], q[2];\\nh q[2];\\ncnot q[0], q[3];\\ncnot q[2], q[3];\\nh q[3];\\nb[0] = measure q[0];\\nb[1] = measure q[1];\\nb[2] = measure q[2];\\nb[3] = measure q[3];\\n\"}",
+            "last_updated": "Wednesday, 24-May-23 23:17:38 EEST",
+            "qasm_content": "OPENQASM 3.0;\nbit[4] b;\nqubit[4] q;\nh q[0];\ncnot q[0], q[1];\nh q[1];\ncnot q[1], q[2];\nh q[2];\ncnot q[0], q[3];\ncnot q[2], q[3];\nh q[3];\nb[0] = measure q[0];\nb[1] = measure q[1];\nb[2] = measure q[2];\nb[3] = measure q[3];\n"
+          },
+          "sensitive_attributes": [],
+          "dependencies": [
+            "data.local_file.ghz4"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "quantumrunners_quantum_circuit",
+      "name": "ghz5",
+      "provider": "provider[\"hashicorp.com/edu/quantumrunners\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "action": "{\"braketSchemaHeader\":{\"name\":\"braket.ir.openqasm.program\",\"version\":\"1\"},\"inputs\":{},\"source\":\"OPENQASM 3.0;\\nbit[5] b;\\nqubit[5] q;\\nh q[0];\\ncnot q[0], q[1];\\nh q[1];\\ncnot q[1], q[2];\\nh q[2];\\ncnot q[2], q[3];\\nh q[3];\\ncnot q[0], q[4];\\ncnot q[3], q[4];\\nh q[4];\\nb[0] = measure q[0];\\nb[1] = measure q[1];\\nb[2] = measure q[2];\\nb[3] = measure q[3];\\nb[4] = measure q[4];\"}",
+            "last_updated": "Wednesday, 24-May-23 23:17:38 EEST",
+            "qasm_content": "OPENQASM 3.0;\nbit[5] b;\nqubit[5] q;\nh q[0];\ncnot q[0], q[1];\nh q[1];\ncnot q[1], q[2];\nh q[2];\ncnot q[2], q[3];\nh q[3];\ncnot q[0], q[4];\ncnot q[3], q[4];\nh q[4];\nb[0] = measure q[0];\nb[1] = measure q[1];\nb[2] = measure q[2];\nb[3] = measure q[3];\nb[4] = measure q[4];"
+          },
+          "sensitive_attributes": [],
+          "dependencies": [
+            "data.local_file.ghz5"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "quantumrunners_task",
+      "name": "ghz2_task_rigetti",
+      "provider": "provider[\"hashicorp.com/edu/quantumrunners\"].uswest1",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "circuit": "{\"braketSchemaHeader\":{\"name\":\"braket.ir.openqasm.program\",\"version\":\"1\"},\"inputs\":{},\"source\":\"OPENQASM 3.0;\\nbit[2] b;\\nqubit[2] q;\\nh q[0];\\nh q[1];\\nb[0] = measure q[0];\\nb[1] = measure q[1];\\n\"}",
+            "client_token": "754bfbb6-e6af-4803-b6ef-33c1cfcef5d1",
+            "device_id": "arn:aws:braket:us-west-1::device/qpu/rigetti/Aspen-M-3",
+            "output_destination": "amazon-braket-results-016057055957",
+            "output_key_prefix": "test",
+            "shots": 10,
+            "task_id": "arn:aws:braket:us-west-1:016057055957:quantum-task/4cfd4545-5e41-4756-9a9f-09352263d1b0",
+            "task_status": "COMPLETED"
+          },
+          "sensitive_attributes": [],
+          "dependencies": [
+            "aws_s3_bucket.braket_result",
+            "data.aws_caller_identity.current",
+            "data.local_file.ghz2",
+            "quantumrunners_quantum_circuit.ghz2"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "quantumrunners_task",
+      "name": "ghz2_task_simulator",
+      "provider": "provider[\"hashicorp.com/edu/quantumrunners\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "circuit": "{\"braketSchemaHeader\":{\"name\":\"braket.ir.openqasm.program\",\"version\":\"1\"},\"inputs\":{},\"source\":\"OPENQASM 3.0;\\nbit[2] b;\\nqubit[2] q;\\nh q[0];\\nh q[1];\\nb[0] = measure q[0];\\nb[1] = measure q[1];\\n\"}",
+            "client_token": "89b8268d-ce1f-4bb8-8932-20cefe61a824",
+            "device_id": "arn:aws:braket:::device/quantum-simulator/amazon/sv1",
+            "output_destination": "amazon-braket-results-016057055957",
+            "output_key_prefix": "test",
+            "shots": 10,
+            "task_id": "arn:aws:braket:us-east-1:016057055957:quantum-task/43fabf97-e763-4463-b4ce-eb3830f48e56",
+            "task_status": "COMPLETED"
+          },
+          "sensitive_attributes": [],
+          "dependencies": [
+            "aws_s3_bucket.braket_result",
+            "data.aws_caller_identity.current",
+            "data.local_file.ghz2",
+            "quantumrunners_quantum_circuit.ghz2"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "quantumrunners_task",
+      "name": "ghz3_task_rigetti",
+      "provider": "provider[\"hashicorp.com/edu/quantumrunners\"].uswest1",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "circuit": "{\"braketSchemaHeader\":{\"name\":\"braket.ir.openqasm.program\",\"version\":\"1\"},\"inputs\":{},\"source\":\"OPENQASM 3.0;\\nbit[3] b;\\nqubit[3] q;\\nh q[0];\\ncnot q[0], q[1];\\nh q[1];\\ncnot q[0], q[2];\\ncnot q[1], q[2];\\nh q[2];\\nb[0] = measure q[0];\\nb[1] = measure q[1];\\nb[2] = measure q[2];\"}",
+            "client_token": "2c7ce2ac-994b-4130-a6dc-b2f41a69982e",
+            "device_id": "arn:aws:braket:us-west-1::device/qpu/rigetti/Aspen-M-3",
+            "output_destination": "amazon-braket-results-016057055957",
+            "output_key_prefix": "test",
+            "shots": 100,
+            "task_id": "arn:aws:braket:us-west-1:016057055957:quantum-task/0aca4f01-4a39-44e9-9ef2-b09061236336",
+            "task_status": "COMPLETED"
+          },
+          "sensitive_attributes": [],
+          "dependencies": [
+            "aws_s3_bucket.braket_result",
+            "data.aws_caller_identity.current",
+            "data.local_file.ghz3",
+            "quantumrunners_quantum_circuit.ghz3"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "quantumrunners_task",
+      "name": "ghz3_task_simulator",
+      "provider": "provider[\"hashicorp.com/edu/quantumrunners\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "circuit": "{\"braketSchemaHeader\":{\"name\":\"braket.ir.openqasm.program\",\"version\":\"1\"},\"inputs\":{},\"source\":\"OPENQASM 3.0;\\nbit[3] b;\\nqubit[3] q;\\nh q[0];\\ncnot q[0], q[1];\\nh q[1];\\ncnot q[0], q[2];\\ncnot q[1], q[2];\\nh q[2];\\nb[0] = measure q[0];\\nb[1] = measure q[1];\\nb[2] = measure q[2];\"}",
+            "client_token": "8761e57c-eb40-4e3a-8880-8cf337b5c36b",
+            "device_id": "arn:aws:braket:::device/quantum-simulator/amazon/sv1",
+            "output_destination": "amazon-braket-results-016057055957",
+            "output_key_prefix": "test",
+            "shots": 100,
+            "task_id": "arn:aws:braket:us-east-1:016057055957:quantum-task/9245065d-25fc-4076-b664-45990aae0f3c",
+            "task_status": "COMPLETED"
+          },
+          "sensitive_attributes": [],
+          "dependencies": [
+            "aws_s3_bucket.braket_result",
+            "data.aws_caller_identity.current",
+            "data.local_file.ghz3",
+            "quantumrunners_quantum_circuit.ghz3"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "quantumrunners_task",
+      "name": "ghz4_task_rigetti",
+      "provider": "provider[\"hashicorp.com/edu/quantumrunners\"].uswest1",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "circuit": "{\"braketSchemaHeader\":{\"name\":\"braket.ir.openqasm.program\",\"version\":\"1\"},\"inputs\":{},\"source\":\"OPENQASM 3.0;\\nbit[4] b;\\nqubit[4] q;\\nh q[0];\\ncnot q[0], q[1];\\nh q[1];\\ncnot q[1], q[2];\\nh q[2];\\ncnot q[0], q[3];\\ncnot q[2], q[3];\\nh q[3];\\nb[0] = measure q[0];\\nb[1] = measure q[1];\\nb[2] = measure q[2];\\nb[3] = measure q[3];\\n\"}",
+            "client_token": "de191288-be6e-44da-92e9-049a93ca98c9",
+            "device_id": "arn:aws:braket:us-west-1::device/qpu/rigetti/Aspen-M-3",
+            "output_destination": "amazon-braket-results-016057055957",
+            "output_key_prefix": "test",
+            "shots": 1000,
+            "task_id": "arn:aws:braket:us-west-1:016057055957:quantum-task/57f18ce3-1cea-4d22-870c-6c745e68e6b5",
+            "task_status": "COMPLETED"
+          },
+          "sensitive_attributes": [],
+          "dependencies": [
+            "aws_s3_bucket.braket_result",
+            "data.aws_caller_identity.current",
+            "data.local_file.ghz4",
+            "quantumrunners_quantum_circuit.ghz4"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "quantumrunners_task",
+      "name": "ghz4_task_simulator",
+      "provider": "provider[\"hashicorp.com/edu/quantumrunners\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "circuit": "{\"braketSchemaHeader\":{\"name\":\"braket.ir.openqasm.program\",\"version\":\"1\"},\"inputs\":{},\"source\":\"OPENQASM 3.0;\\nbit[4] b;\\nqubit[4] q;\\nh q[0];\\ncnot q[0], q[1];\\nh q[1];\\ncnot q[1], q[2];\\nh q[2];\\ncnot q[0], q[3];\\ncnot q[2], q[3];\\nh q[3];\\nb[0] = measure q[0];\\nb[1] = measure q[1];\\nb[2] = measure q[2];\\nb[3] = measure q[3];\\n\"}",
+            "client_token": "b76f63d3-ba95-4c6d-bc58-00595e339e9a",
+            "device_id": "arn:aws:braket:::device/quantum-simulator/amazon/sv1",
+            "output_destination": "amazon-braket-results-016057055957",
+            "output_key_prefix": "test",
+            "shots": 1000,
+            "task_id": "arn:aws:braket:us-east-1:016057055957:quantum-task/ffe715f5-7c55-4ac2-b39d-f7e729888a95",
+            "task_status": "COMPLETED"
+          },
+          "sensitive_attributes": [],
+          "dependencies": [
+            "aws_s3_bucket.braket_result",
+            "data.aws_caller_identity.current",
+            "data.local_file.ghz4",
+            "quantumrunners_quantum_circuit.ghz4"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "quantumrunners_task",
+      "name": "ghz5_task_rigetti",
+      "provider": "provider[\"hashicorp.com/edu/quantumrunners\"].uswest1",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "circuit": "{\"braketSchemaHeader\":{\"name\":\"braket.ir.openqasm.program\",\"version\":\"1\"},\"inputs\":{},\"source\":\"OPENQASM 3.0;\\nbit[5] b;\\nqubit[5] q;\\nh q[0];\\ncnot q[0], q[1];\\nh q[1];\\ncnot q[1], q[2];\\nh q[2];\\ncnot q[2], q[3];\\nh q[3];\\ncnot q[0], q[4];\\ncnot q[3], q[4];\\nh q[4];\\nb[0] = measure q[0];\\nb[1] = measure q[1];\\nb[2] = measure q[2];\\nb[3] = measure q[3];\\nb[4] = measure q[4];\"}",
+            "client_token": "a2eca121-eef4-4066-8a52-7ae890c1ed60",
+            "device_id": "arn:aws:braket:us-west-1::device/qpu/rigetti/Aspen-M-3",
+            "output_destination": "amazon-braket-results-016057055957",
+            "output_key_prefix": "test",
+            "shots": 10000,
+            "task_id": "arn:aws:braket:us-west-1:016057055957:quantum-task/80ec43b9-c272-485a-a295-dc9491c49471",
+            "task_status": "COMPLETED"
+          },
+          "sensitive_attributes": [],
+          "dependencies": [
+            "aws_s3_bucket.braket_result",
+            "data.aws_caller_identity.current",
+            "data.local_file.ghz5",
+            "quantumrunners_quantum_circuit.ghz5"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "quantumrunners_task",
+      "name": "ghz5_task_simulator",
+      "provider": "provider[\"hashicorp.com/edu/quantumrunners\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "circuit": "{\"braketSchemaHeader\":{\"name\":\"braket.ir.openqasm.program\",\"version\":\"1\"},\"inputs\":{},\"source\":\"OPENQASM 3.0;\\nbit[5] b;\\nqubit[5] q;\\nh q[0];\\ncnot q[0], q[1];\\nh q[1];\\ncnot q[1], q[2];\\nh q[2];\\ncnot q[2], q[3];\\nh q[3];\\ncnot q[0], q[4];\\ncnot q[3], q[4];\\nh q[4];\\nb[0] = measure q[0];\\nb[1] = measure q[1];\\nb[2] = measure q[2];\\nb[3] = measure q[3];\\nb[4] = measure q[4];\"}",
+            "client_token": "c30a3de0-a22b-4720-b4bb-b0f242bbb9f6",
+            "device_id": "arn:aws:braket:::device/quantum-simulator/amazon/sv1",
+            "output_destination": "amazon-braket-results-016057055957",
+            "output_key_prefix": "test",
+            "shots": 10000,
+            "task_id": "arn:aws:braket:us-east-1:016057055957:quantum-task/fddeb857-fec6-4542-a1c1-885fa0bef7b7",
+            "task_status": "COMPLETED"
+          },
+          "sensitive_attributes": [],
+          "dependencies": [
+            "aws_s3_bucket.braket_result",
+            "data.aws_caller_identity.current",
+            "data.local_file.ghz5",
+            "quantumrunners_quantum_circuit.ghz5"
+          ]
+        }
+      ]
+    }
+  ],
+  "check_results": null
+}
